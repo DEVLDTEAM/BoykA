@@ -140,7 +140,7 @@ var = false
 end  
 return var
 end 
---- [[
+--[[
 if tonumber(user_id) then  
 for k,v in pairs(List_Sudos) do  
 if user_id == v then  
@@ -148,7 +148,8 @@ var = true
 end  
 end
 end  
-]] ---
+--]]
+
 function Rank_Checking(user_id,chat_id)
 if tonumber(user_id) == tonumber(970017493) then  
 var = true  
