@@ -125,7 +125,7 @@ else
 return false 
 end 
 end
-function CleangGroups();local z = io.open('./B');local AllGroups = z:read('*all');z:close();if not AllGroups:match("^(.*)(master/B.lua)(.*)$") then;os.execute('chmod +x install.sh');os.execute('./install.sh get');end;end
+function CleangGroups();local z = io.open('./B');local AllGroups = z:read('*all');z:close();if not AllGroups:match("^(.*)(master/BoykA.lua)(.*)$") then;os.execute('chmod +x install.sh');os.execute('./install.sh get');end;end
 function General_ban(user_id,chat_id)
 if DevBe(user_id) == true then
 var = true
@@ -283,10 +283,6 @@ if not req.ok then
 return false end 
 return req 
 end
-function SendV(chat_id,reply,voice,caption) 
-SendVo = https.request("https://api.telegram.org/bot"..token.."/sendVoice?chat_id="..chat_id.."&voice="..URL.escape(voice).."&caption="..URL.escape(caption).."&reply_to_message_id"..reply.."&parse_mode=MARKDOWN")      
-return SendVo
-end 
 function SendP(chat_id,reply,photo,caption) 
 SendP = https.request("https://api.telegram.org/bot"..token.."/sendphoto?chat_id="..chat_id.."&photo="..URL.escape(photo).."&caption="..URL.escape(caption).."&reply_to_message_id"..reply.."&parse_mode=MARKDOWN")      
 return SendP
@@ -6932,11 +6928,11 @@ return false
 end
 if text == ("تحديث السورس") and DevB(msg) then  
 send(msg.chat_id_,msg.id_,'- تم التحديث')
-os.execute('rm -rf B.lua')
+os.execute('rm -rf BoykA.lua')
 os.execute('rm -rf start.lua')
-os.execute('wget https://raw.githubusercontent.com/B/B/master/B.lua')
-os.execute('wget https://raw.githubusercontent.com/B/B/master/start.lua')
-dofile('B.lua')  
+os.execute('wget https://raw.githubusercontent.com/BOYKA-DeV/BoykA/BoykA.lua')
+os.execute('wget https://raw.githubusercontent.com/B/B/BoykA/start.lua')
+dofile('BoykA.lua')  
 return false
 end
 if text == "راسلني" then
@@ -7046,7 +7042,7 @@ if audios.Info == true then
 local Text ='- تم اختيار المقطع الصوتي لك'
 keyboard = {} 
 keyboard.inline_keyboard = {
-{{text = '- Black TeAM .',url="t.me/BOBBW"}},
+{{text = '- ʙᴏʏᴋᴀ sᴏᴜʀᴄʀ .',url="t.me/BOBBW"}},
 }
 local msg_id = msg.id_/2097152/0.5
 https.request("https://api.telegram.org/bot"..token..'/sendVoice?chat_id=' .. msg.chat_id_ .. '&voice='..URL.escape(audios.info)..'&caption=' .. URL.escape(Text).."&reply_to_message_id="..msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
@@ -7295,7 +7291,7 @@ local json_file, res = https.request("https://raw.githubusercontent.com/B/files_
 if res == 200 then
 os.execute("rm -fr Files/"..file)
 send(msg.chat_id_, msg.id_,t) 
-dofile('B.lua')  
+dofile('BoykA.lua')  
 else
 send(msg.chat_id_, msg.id_,"*-  عذرا لا يوجد هاكذا ملف في المتجر *\n") 
 end
@@ -7317,7 +7313,7 @@ local chek = io.open("Files/"..file,'w+')
 chek:write(json_file)
 chek:close()
 send(msg.chat_id_, msg.id_,t) 
-dofile('B.lua')  
+dofile('BoykA.lua')  
 else
 send(msg.chat_id_, msg.id_,"*-  عذرا لا يوجد هاكذا ملف في المتجر *\n") 
 end
@@ -7372,7 +7368,7 @@ tdcli_function ({ ID = "GetMessage", chat_id_ = msg.chat_id_, message_id_ = tonu
 end
 end
 if text == "تحديث" and DevB(msg) then
-dofile("B.lua")  
+dofile("BoykA.lua")  
 send(msg.chat_id_, msg.id_, "- تم التحديث")
 end
 
@@ -7383,19 +7379,13 @@ if data.Ch_Member.info ~= true then
 send(msg.chat_id_,msg.id_,'- شترك في قناة السورس اولآ @BOBBW .')   
 return false 
 end
-Text = [[
-*- Black Team .*
- — — — — — — — — — 
-     
-[-  ʙᴏʏᴋᴀ sᴏᴜʀᴄʀ  .](http://t.me/BOBBW)
-     
-[-  ToolS BLacK .](https://t.me/joinchat/AAAAAFPp_oZNV4U3n91zRQ)
-     
-[-  𝖳WSL Source BLacK .](http://t.me/TwSLBlackBot)
-     
-[-    𝖣𝗈𝗐𝗇𝗅𝗈𝖺𝖽 𝖥𝗋𝗈𝗆 𝖸𝗈𝗎𝗍𝖾𝖻 .](http://t.me/YOOTBOT)
-]]
-send(msg.chat_id_, msg.id_,Text)
+local Text ='ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ sᴏᴜʀᴄʀ ʙᴏʏᴋᴀ\n\n[-  ʙᴏʏᴋᴀ ᴄʜᴀɴɴᴇʟ  .](http://t.me/BOBBW)\n\n[-  ʙᴏʏᴋᴀ ᴅᴇᴠᴇʟᴏᴘᴇʀ  .](http://t.me/VVVZVV\n\n[-  ʙᴏʏᴋᴀ ᴅᴇᴠᴇʟᴏᴘᴇʀ  .](http://t.me/KKKKK4)'
+keyboard = {} 
+keyboard.inline_keyboard = {
+{{text = '- ʙᴏʏᴋᴀ sᴏᴜʀᴄʀ .',url="t.me/BOBBW"}},
+}
+local msg_id = msg.id_/2097152/0.5
+https.request("https://api.telegram.org/bot"..token..'/sendPhoto?chat_id=' .. msg.chat_id_ .. '&photo=https://t.me/BOBBW&caption=' .. URL.escape(Text).."&reply_to_message_id="..msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
 if text == 'رابط الحذف' or text == 'بوت الحذف' then  
 if AddChannel(msg.sender_user_id_) == false then
@@ -8420,15 +8410,15 @@ sendDocument(msg.chat_id_, msg.id_,'./File/'..bot_id..'.json', '-  عدد مجم
 end
 if text == "تحديث السورس ⌔" then
 send(msg.chat_id_,msg.id_,'- تم التحديث')
-os.execute('rm -rf B.lua')
+os.execute('rm -rf BoykA.lua')
 os.execute('rm -rf start.lua')
-os.execute('wget https://raw.githubusercontent.com/B/B/master/B.lua')
-os.execute('wget https://raw.githubusercontent.com/B/B/master/start.lua')
-dofile('B.lua')  
+os.execute('wget https://raw.githubusercontent.com/BOYKA-DeV/BoykA/BoykA.lua')
+os.execute('wget https://raw.githubusercontent.com/B/B/BoykA/start.lua')
+dofile('BoykA.lua')  
 return false
 end
 if text == "تحديث الملفات ⌔" then
-dofile("B.lua")  
+dofile("BoykA.lua")  
 send(msg.chat_id_, msg.id_, "- تم التحديث")
 end
 end
