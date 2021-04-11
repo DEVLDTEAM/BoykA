@@ -55,22 +55,22 @@ os.execute('lua start.lua')
 end ---ifnot
 end
 if not redis:get(Server_Done.."UserSudo_Write") then
-print("\27[1;36mارسل ايدي المطور الان :")
+print("\27[1;36mارسل ايدي المطور الان :\27[m")
 local Id = io.read():gsub(' ','') 
 if tostring(Id):match('%d+') then
 data,res = https.request("https://boyka-api.ml/index.php?bn=info&id="..Id)
 if res == 200 then
 muaed = json:decode(data)
 if muaed.Info.info == 'Is_Spam' then
-io.write("\27[1;31mعذرا الايدي محظور من السورس ارسل ايدي اخر :")
+io.write("\27[1;31mعذرا الايدي محظور من السورس ارسل ايدي اخر :\27[m")
 os.execute('lua start.lua')
 end ---ifBn
 if muaed.Info.info == 'Ok' then
-io.write("\27[1;32mتم حفظ الايدي بنجاح :")
+io.write("\27[1;32mتم حفظ الايدي بنجاح :\27[m")
 redis:set(Server_Done.."UserSudo_Write",Id)
 end ---ifok
 else
-io.write("\27[1;35mلم يتم حفظ الايدي يوجد خطأ :")
+io.write("\27[1;35mلم يتم حفظ الايدي يوجد خطأ :\27[m")
 end  ---ifid
 os.execute('lua start.lua')
 end ---ifnot
