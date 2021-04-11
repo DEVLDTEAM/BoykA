@@ -4,8 +4,8 @@ install() {
 rm -rf $HOME/.telegram-cli
 sudo chmod +x tg
 chmod +x BoykA
-chmod +x BA
-./BA
+chmod +x ts
+./ts
 }
 get() {
 rm -fr BoykA.lua
@@ -51,5 +51,4 @@ rm -rf luarocks*
 cd BoykA
 rm -rf luarocks*
 lua start.lua
-
 
