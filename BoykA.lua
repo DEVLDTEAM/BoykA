@@ -8593,7 +8593,7 @@ if text == "✫: تحديث السورس ." then
 send(msg.chat_id_,msg.id_,'✫: تم التحديث')
 os.execute('rm -rf BoykA.lua')
 os.execute('rm -rf start.lua')
-os.execute('wget https://raw.githubusercontent.com/'..BOYKA..'/BoykA/BoykA.lua')
+os.execute('wget https://raw.githubusercontent.com/'..BOYKA..'/BoykA/BoykA/BoykA.lua')
 os.execute('wget https://raw.githubusercontent.com/'..BOYKA..'/BoykA/BoykA/start.lua')
 dofile('BoykA.lua')  
 return false

