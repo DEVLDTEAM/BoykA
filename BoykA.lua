@@ -175,43 +175,6 @@ end
 end  
 return var
 end 
-function UpSr(m,user_id,chat_id)
-if XB_Sudo(m) == true then
-redis:srem(bot_id.."TSudo:User", user_id)
-redis:srem(bot_id.."Sudo:User", user_id)
-redis:srem(bot_id.."Basic:Constructor"..chat_id,user_id)
-redis:srem(bot_id.."Constructor"..chat_id, user_id)
-redis:srem(bot_id.."Manager"..chat_id, user_id)
-redis:srem(bot_id.."Mod:User"..chat_id, user_id)
-redis:srem(bot_id.."Special:User"..chat_id, user_id)
-elseif DevBot(m) == true then
-redis:srem(bot_id.."Mod:User"..chat_id, user_id)
-redis:srem(bot_id.."Special:User"..chat_id, user_id)
-redis:srem(bot_id.."Manager"..chat_id, user_id)
-redis:srem(bot_id.."Constructor"..chat_id, user_id)
-redis:srem(bot_id.."Basic:Constructor"..chat_id,user_id)
-elseif creatorA(m,user_id,chat_id) == true then
-redis:srem(bot_id.."Mod:User"..chat_id, user_id)
-redis:srem(bot_id.."Special:User"..chat_id, user_id)
-redis:srem(bot_id.."Manager"..chat_id, user_id)
-redis:srem(bot_id.."Constructor"..chat_id, user_id)
-redis:srem(bot_id.."Basic:Constructor"..chat_id,user_id)
-elseif BasicConstructor(m) == true then
-redis:srem(bot_id.."Mod:User"..chat_id, user_id)
-redis:srem(bot_id.."Special:User"..chat_id, user_id)
-redis:srem(bot_id.."Manager"..chat_id, user_id)
-redis:srem(bot_id.."Constructor"..chat_id, user_id)
-elseif Constructor(m) == true then
-redis:srem(bot_id.."Mod:User"..chat_id, user_id)
-redis:srem(bot_id.."Special:User"..chat_id, user_id)
-redis:srem(bot_id.."Manager"..chat_id, user_id)
-elseif Owner(m) == true then
-redis:srem(bot_id.."Mod:User"..chat_id, user_id)
-redis:srem(bot_id.."Special:User"..chat_id, user_id)
-elseif Addictive(m) == true then
-redis:srem(bot_id.."Special:User"..chat_id, user_id)
-end  
-end 
 function Get_Rank(msg,user_id,chat_id)
 if tonumber(user_id) then  
 for k,v in pairs(List_Sudos) do  
@@ -528,39 +491,12 @@ end
 end
 return var
 end
-
 function Reply_Status(msg,user_id,status,text)
 tdcli_function ({ID = "GetUser",user_id_ = user_id},function(arg,data) 
+local UserName = (data.username_ or "BOYKA")
 if data.first_name_ ~= false then
-local UserName = (data.username_ or "BOBBW")
-local NameUser = "[- ʙᴏʏᴋᴀ sᴏᴜʀᴄʀ .](https://t.me/BOBBW)\n — — — — — — — — —\n- بواسطه -› ["..data.first_name_.."](T.me/"..UserName..")"
-local NameUserr = "[- ʙᴏʏᴋᴀ sᴏᴜʀᴄʀ .](https://t.me/BOBBW)\n — — — — — — — — —\n- اسم المستخدم -› ["..data.first_name_.."](T.me/"..UserName..")"
-if status == "lock" then
-send(msg.chat_id_, msg.id_,NameUser.."\n"..text.."\n— — — — — — — — —\n- تم تنفيذ الامر بخاصيه ( المسح )\n")
-return false
-end
-if status == "lockktm" then
-send(msg.chat_id_, msg.id_,NameUser.."\n"..text.."\n— — — — — — — — —\n- تم تنفيذ الامر بخاصيه ( الكتم )\n")
-return false
-end
-if status == "lockkick" then
-send(msg.chat_id_, msg.id_,NameUser.."\n"..text.."\n— — — — — — — — —\n- تم تنفيذ الامر بخاصيه ( الطرد )\n")
-return false
-end
-if status == "lockkid" then
-send(msg.chat_id_, msg.id_,NameUser.."\n"..text.."\n— — — — — — — — —\n- تم تنفيذ الامر بخاصيه ( التقييد )\n")
-return false
-end
-if status == "unlock" then
-send(msg.chat_id_, msg.id_,NameUser.."\n"..text)
-return false
-end
 if status == "reply" then
-send(msg.chat_id_, msg.id_,NameUserr.."\n"..text)
-return false
-end
-if status == "reply_Add" then
-send(msg.chat_id_, msg.id_,NameUserr.."\n"..text)
+send(msg.chat_id_, msg.id_,"- المستخدم -› ["..data.first_name_.."](T.me/"..UserName..") .".."\n"..text)
 return false
 end
 else
@@ -2271,8 +2207,8 @@ return false
 end
 end
 end
-if General_ban(msg,result, result.chat_id_) == true then
-send(msg.chat_id_, msg.id_, "\n- عذرا لا تستطيع طرد او حظر او كتم او تقييد ( "..Get_Rank(msg,result.sender_user_id_,msg.chat_id_).." )")
+if General_ban(result,result.sender_user_id_,result.chat_id_) == true then
+send(msg.chat_id_, msg.id_, "\n- عذرا لا تستطيع طرد او حظر او كتم او تقييد ( "..Get_Rank(result,result.sender_user_id_,msg.chat_id_).." )")
 else
 redis:sadd(bot_id.."GBan:User", result.sender_user_id_)
 Kick_Group(result.chat_id_, result.sender_user_id_)
@@ -3162,7 +3098,7 @@ return false
 end
 end
 end
-if Rank_Checking(msg,result.sender_user_id_, msg.chat_id_) == true then
+if Rank_Checking(result,result.sender_user_id_, msg.chat_id_) == true then
 send(msg.chat_id_, msg.id_, "\n- عذرا لا تستطيع طرد او حظر او كتم او تقييد ( "..Get_Rank(msg,result.sender_user_id_,msg.chat_id_).." )")
 else
 tdcli_function ({ ID = "ChangeChatMemberStatus", chat_id_ = msg.chat_id_, user_id_ = result.sender_user_id_, status_ = { ID = "ChatMemberStatusKicked" },},function(arg,data) 
@@ -3393,7 +3329,7 @@ return false
 end
 end
 end
-if Rank_Checking(msg,result.sender_user_id_, msg.chat_id_) == true then
+if Rank_Checking(result,result.sender_user_id_, msg.chat_id_) == true then
 send(msg.chat_id_, msg.id_, "\n- عذرا لا تستطيع طرد او حظر او كتم او تقييد ( "..Get_Rank(msg,result.sender_user_id_,msg.chat_id_).." )")
 return false 
 end     
@@ -3563,7 +3499,7 @@ return false
 end
 end
 end
-if Rank_Checking(msg,result.sender_user_id_, msg.chat_id_) then
+if Rank_Checking(result,result.sender_user_id_, msg.chat_id_) then
 send(msg.chat_id_, msg.id_, "\n- عذرا لا تستطيع طرد او حظر او كتم او تقييد ( "..Get_Rank(msg,result.sender_user_id_,msg.chat_id_).." )")
 else
 https.request("https://api.telegram.org/bot"..token.."/restrictChatMember?chat_id="..msg.chat_id_.."&user_id="..result.sender_user_id_)
@@ -3723,7 +3659,7 @@ return false
 end
 end
 end
-if Rank_Checking(msg,result.sender_user_id_, msg.chat_id_) == true then
+if Rank_Checking(result,result.sender_user_id_, msg.chat_id_) == true then
 send(msg.chat_id_, msg.id_, "\n- عذرا لا تستطيع طرد او حظر او كتم او تقييد ( "..Get_Rank(msg,result.sender_user_id_,msg.chat_id_).." )")
 else
 tdcli_function ({ ID = "ChangeChatMemberStatus", chat_id_ = msg.chat_id_, user_id_ = result.id_, status_ = { ID = "ChatMemberStatusKicked" },},function(arg,data) 
@@ -5205,33 +5141,101 @@ if text == "تعطيل ردود المطور" and Owner(msg) then
 redis:set(bot_id.."Reply:Sudo"..msg.chat_id_,true)   
 send(msg.chat_id_, msg.id_,"- تم تعطيل ردود المطور" ) 
 end
-if text and text:match("^تنزيل الكل @(.*)$") and Addictive(msg) then
-local username = text:match("^تنزيل الكل @(.*)$") 
-function start_function(extra, result, success)
-if result.id_ then
+if text and text:match("^تنزيل الكل @(.*)$") and Owner(msg) then
+function FunctionStatus(extra, result, success)
+if (result.id_) then
+if DevBe(result.id_) == true then
+send(msg.chat_id_, msg.id_,"- لا تستطيع تنزيل المستخدم .")
+return false 
+end
 if Rank_Checking(msg,result.id_,msg.chat_id_) ~= false then
 send(msg.chat_id_, msg.id_,"\n- تم تنزيل الشخص من جميع الرتب .")
-UpSr(msg,result.id_,msg.chat_id_)
 else
 send(msg.chat_id_, msg.id_,"\n- ليس لديه رتب حتى استطيع تنزيله .")
 end
-else
-texts = '- لا يوجد حساب بهذا المعرف .'
+if DevBe(msg.sender_user_id_) == true then
+redis:srem(bot_id.."TSudo:User", result.id_)
+redis:srem(bot_id.."Sudo:User", result.id_)
+redis:srem(bot_id.."Basic:Constructor"..msg.chat_id_,result.id_)
+redis:srem(bot_id.."Constructor"..msg.chat_id_,result.id_)
+redis:srem(bot_id..'Manager'..msg.chat_id_, result.id_)
+redis:srem(bot_id..'Mod:User'..msg.chat_id_, result.id_)
+redis:srem(bot_id..'Special:User'..msg.chat_id_, result.id_)
+elseif redis:sismember(bot_id.."Sudo:User",msg.sender_user_id_) then
+redis:srem(bot_id..'Special:User'..msg.chat_id_, result.id_)
+redis:srem(bot_id..'Mod:User'..msg.chat_id_, result.id_)
+redis:srem(bot_id..'Manager'..msg.chat_id_, result.id_)
+redis:srem(bot_id..'Constructor'..msg.chat_id_, result.id_)
+redis:srem(bot_id.."Basic:Constructor"..msg.chat_id_,result.id_)
+elseif creatorA(msg,msg.sender_user_id_,msg.chat_id_) == true then
+redis:srem(bot_id..'Special:User'..msg.chat_id_, result.id_)
+redis:srem(bot_id..'Mod:User'..msg.chat_id_, result.id_)
+redis:srem(bot_id..'Manager'..msg.chat_id_, result.id_)
+redis:srem(bot_id..'Constructor'..msg.chat_id_, result.id_)
+redis:srem(bot_id.."Basic:Constructor"..msg.chat_id_,result.id_)
+elseif redis:sismember(bot_id.."Basic:Constructor"..msg.chat_id_, msg.sender_user_id_) then
+redis:srem(bot_id..'Constructor'..msg.chat_id_, result.id_)
+redis:srem(bot_id..'Manager'..msg.chat_id_, result.id_)
+redis:srem(bot_id..'Mod:User'..msg.chat_id_, result.id_)
+redis:srem(bot_id..'Special:User'..msg.chat_id_, result.id_)
+elseif redis:sismember(bot_id..'Constructor'..msg.chat_id_, msg.sender_user_id_) then
+redis:srem(bot_id..'Manager'..msg.chat_id_, result.id_)
+redis:srem(bot_id..'Mod:User'..msg.chat_id_, result.id_)
+redis:srem(bot_id..'Special:User'..msg.chat_id_, result.id_)
+elseif redis:sismember(bot_id..'Manager'..msg.chat_id_, msg.sender_user_id_) then
+redis:srem(bot_id..'Mod:User'..msg.chat_id_, result.id_)
+redis:srem(bot_id..'Special:User'..msg.chat_id_, result.id_)
 end
 end
-tdcli_function ({ID = "SearchPublicChat",username_ = username}, start_function, nil)
-return false
 end
-if text == ("تنزيل الكل") and msg.reply_to_message_id_ ~= 0 and Addictive(msg) then
-function start_function(extra, result, success)
-if Rank_Checking(msg,result.sender_user_id_,msg.chat_id_) ~= false then
+tdcli_function ({ID = "SearchPublicChat",username_ = text:match("^تنزيل الكل @(.*)$")}, FunctionStatus, nil)
+end
+if text == ("تنزيل الكل") and msg.reply_to_message_id_ ~= 0 and Owner(msg) then
+function Function_Status(extra, result, success)
+if DevBe(result.sender_user_id_) == true then
+send(msg.chat_id_, msg.id_,"- لا تستطيع تنزيل المستخدم .")
+return false 
+end
+if Rank_Checking(result,result.sender_user_id_,msg.chat_id_) ~= false then
 send(msg.chat_id_, msg.id_,"\n- تم تنزيل الشخص من جميع الرتب .")
-UpSr(msg,result.sender_user_id_,msg.chat_id_)
 else
 send(msg.chat_id_, msg.id_,"\n- ليس لديه رتب حتى استطيع تنزيله .")
 end
+if DevBe(msg.sender_user_id_) == true then
+redis:srem(bot_id.."TSudo:User", result.sender_user_id_)
+redis:srem(bot_id.."Sudo:User", result.sender_user_id_)
+redis:srem(bot_id.."Basic:Constructor"..msg.chat_id_,result.sender_user_id_)
+redis:srem(bot_id.."Constructor"..msg.chat_id_,result.sender_user_id_)
+redis:srem(bot_id..'Manager'..msg.chat_id_, result.sender_user_id_)
+redis:srem(bot_id..'Mod:User'..msg.chat_id_, result.sender_user_id_)
+redis:srem(bot_id..'Special:User'..msg.chat_id_, result.sender_user_id_)
+elseif redis:sismember(bot_id.."Sudo:User",msg.sender_user_id_) then
+redis:srem(bot_id..'Special:User'..msg.chat_id_, result.sender_user_id_)
+redis:srem(bot_id..'Mod:User'..msg.chat_id_, result.sender_user_id_)
+redis:srem(bot_id..'Manager'..msg.chat_id_, result.sender_user_id_)
+redis:srem(bot_id..'Constructor'..msg.chat_id_, result.sender_user_id_)
+redis:srem(bot_id.."Basic:Constructor"..msg.chat_id_,result.sender_user_id_)
+elseif creatorA(msg,msg.sender_user_id_,msg.chat_id_) == true then
+redis:srem(bot_id..'Special:User'..msg.chat_id_, result.sender_user_id_)
+redis:srem(bot_id..'Mod:User'..msg.chat_id_, result.sender_user_id_)
+redis:srem(bot_id..'Manager'..msg.chat_id_, result.sender_user_id_)
+redis:srem(bot_id..'Constructor'..msg.chat_id_, result.sender_user_id_)
+redis:srem(bot_id.."Basic:Constructor"..msg.chat_id_,result.sender_user_id_)
+elseif redis:sismember(bot_id.."Basic:Constructor"..msg.chat_id_, msg.sender_user_id_) then
+redis:srem(bot_id..'Constructor'..msg.chat_id_, result.sender_user_id_)
+redis:srem(bot_id..'Manager'..msg.chat_id_, result.sender_user_id_)
+redis:srem(bot_id..'Mod:User'..msg.chat_id_, result.sender_user_id_)
+redis:srem(bot_id..'Special:User'..msg.chat_id_, result.sender_user_id_)
+elseif redis:sismember(bot_id..'Constructor'..msg.chat_id_, msg.sender_user_id_) then
+redis:srem(bot_id..'Manager'..msg.chat_id_, result.sender_user_id_)
+redis:srem(bot_id..'Mod:User'..msg.chat_id_, result.sender_user_id_)
+redis:srem(bot_id..'Special:User'..msg.chat_id_, result.sender_user_id_)
+elseif redis:sismember(bot_id..'Manager'..msg.chat_id_, msg.sender_user_id_) then
+redis:srem(bot_id..'Mod:User'..msg.chat_id_, result.sender_user_id_)
+redis:srem(bot_id..'Special:User'..msg.chat_id_, result.sender_user_id_)
 end
-tdcli_function ({ID = "GetMessage",chat_id_ = msg.chat_id_,message_id_ = tonumber(msg.reply_to_message_id_)}, start_function, nil)
+end
+tdcli_function ({ID = "GetMessage",chat_id_ = msg.chat_id_,message_id_ = tonumber(msg.reply_to_message_id_)}, Function_Status, nil)
 end
 if text == "تاك للكل" and Addictive(msg) then
 if AddChannel(msg.sender_user_id_) == false then
@@ -6133,7 +6137,7 @@ end
 end
 
 
-if text == 'ايدي' and tonumber(msg.reply_to_message_id_) > 0 and not redis:get(bot_id..'Lock:ID:Bot'..msg.chat_id_) then
+if text == 'ايدي' or text == 'كشف' and tonumber(msg.reply_to_message_id_) > 0 and not redis:get(bot_id..'Lock:ID:Bot'..msg.chat_id_) then
 function Function_B(extra, result, success)
 tdcli_function ({ID = "GetUser",user_id_ = result.sender_user_id_},function(arg,data) 
 if data.first_name_ == false then
@@ -6148,7 +6152,7 @@ end
 local Id = data.id_
 local NumMsg = redis:get(bot_id..'messageUser'..msg.chat_id_..':'..data.id_) or 0
 local TotalMsg = Total_message(NumMsg)
-local Status_Gps = Get_Rank(msg,data.id_,msg.chat_id_)
+local Status_Gps = Get_Rank(result,Id,msg.chat_id_)
 local message_edit = redis:get(bot_id..'message_edit'..msg.chat_id_..data.id_) or 0
 local Num_Games = redis:get(bot_id.."Tshak:Msg_User"..msg.chat_id_..":"..data.id_) or 0
 local Add_Mem = redis:get(bot_id.."Add:Memp"..msg.chat_id_..":"..data.id_) or 0
@@ -6172,7 +6176,7 @@ end
 local Id = data.id_
 local NumMsg = redis:get(bot_id..'messageUser'..msg.chat_id_..':'..data.id_) or 0
 local TotalMsg = Total_message(NumMsg)
-local Status_Gps = Get_Rank(msg,Id,msg.chat_id_)
+local Status_Gps = Get_Rank(result,Id,msg.chat_id_)
 local message_edit = redis:get(bot_id..'message_edit'..msg.chat_id_..data.id_) or 0
 local Num_Games = redis:get(bot_id.."Tshak:Msg_User"..msg.chat_id_..":"..data.id_) or 0
 local Add_Mem = redis:get(bot_id.."Add:Memp"..msg.chat_id_..":"..data.id_) or 0
@@ -7216,11 +7220,22 @@ t = t..'],'
 end
 t = t..'"linkgroup":"'..link..'"}' or ''
 end
+if #memo ~= 0 then 
+t = t..'"mem":['
+for k,v in pairs(memo) do
+if k == 1 then
+t =  t..'"'..v..'"'
+else
+t =  t..',"'..v..'"'
+end
+end   
+t = t..'],'
+end
 t = t..'}}'
 local File = io.open('./File/'..bot_id..'.json', "w")
 File:write(t)
 File:close()
-sendDocument(Id_Sudo, msg.id_,'./File/'..bot_id..'.json', '-  عدد مجموعات التي في البوت { '..#list..'}')
+sendDocument(Id_Sudo, msg.id_,'./File/'..bot_id..'.json', '-  عدد مجموعات التي في البوت { '..#list..'} .\n-عدد المشتركين { '..#memo..' } .')
 redis:set(bot_id.."AutoFile:Time",os.date("%x"))
 end
 else 
@@ -7787,7 +7802,7 @@ tdcli_function({ID ="GetChat",chat_id_=msg.chat_id_},function(arg,chat)
 if redis:sismember(bot_id..'Chek:Groups',msg.chat_id_) then
 send(msg.chat_id_, msg.id_,'- المجموعه مفعله سابقا ')
 else
-Reply_Status(msg,result.id_,'reply_Add','- تم تفعيل المجموعه ~ '..chat.title_..'')
+send(msg.chat_id_, msg.id_,'- تم تفعيل المجموعه -> '..chat.title_)
 https.request("https://api.telegram.org/bot" .. token .. "/exportChatInviteLink?chat_id=" ..msg.chat_id_)
 redis:sadd(bot_id..'Chek:Groups',msg.chat_id_)
 local Name = '['..result.first_name_..'](tg://user?id='..result.id_..')'
@@ -7835,7 +7850,7 @@ tdcli_function({ID ="GetChat",chat_id_=msg.chat_id_},function(arg,chat)
 if not redis:sismember(bot_id..'Chek:Groups',msg.chat_id_) then
 send(msg.chat_id_, msg.id_,'- المجموعه معطله سابقا ')
 else
-Reply_Status(msg,result.id_,'reply_Add','- تم تعطيل المجموعه ~ '..chat.title_..'')
+send(msg.chat_id_, msg.id_,'- تم تعطيل المجموعه -> '..chat.title_)
 redis:srem(bot_id..'Chek:Groups',msg.chat_id_)  
 local Name = '['..result.first_name_..'](tg://user?id='..result.id_..')'
 local NameChat = chat.title_
@@ -7899,7 +7914,7 @@ if tonumber(data.member_count_) < tonumber(redis:get(bot_id..'Num:Add:Bot') or 0
 send(msg.chat_id_, msg.id_,'- عدد اعضاء المجموعه اقل من *~ {'..(redis:get(bot_id..'Num:Add:Bot') or 0)..'* عضو')
 return false
 end
-Reply_Status(msg,result.id_,'reply_Add','- تم تفعيل المجموعه ~ '..chat.title_..'')
+send(msg.chat_id_, msg.id_,'- تم تفعيل المجموعه -> '..chat.title_)
 https.request("https://api.telegram.org/bot" .. token .. "/exportChatInviteLink?chat_id=" ..msg.chat_id_)
 redis:sadd(bot_id..'Chek:Groups',msg.chat_id_)  
 redis:sadd(bot_id..'Basic:Constructor'..msg.chat_id_, msg.sender_user_id_)
@@ -7945,10 +7960,11 @@ if DevB(msg) then
 local Text = '- مرحبا . \n- يمكنك استخدام الاعدادات الخاصه بالبوت الان .'
 local keyboard = {
 {'- قناه تحديثات البوت .'},
+{'- تفعيل النسخه التلقائيه .','- تعطيل النسخه التلقائيه .'},
+{'- تفعيل التواصل .','- تعطيل التواصل .'},
 {'- تفعيل البوت الخدمي .','- تعطيل البوت الخدمي .'},
 {'- اذاعه بالخاص .','- اذاعه عامه .'},
 {'- الاحصائيات .','- نقل المطور الاساسي .'},
-{'- تفعيل التواصل .','- تعطيل التواصل .'},
 {'- تنظيف الكروبات .','- تنظيف المشتركين .'},
 {'- تفعيل الاذاعه .','- تعطيل الاذاعه .'},
 {'- اذاعه بالتوجيه .','- اذاعه بالتوجيه خاص .'},
@@ -8418,6 +8434,16 @@ end
 if text == "- حذف كليشه الاشتراك ." then  
 redis:del(bot_id..'text:ch:user')
 send(msg.chat_id_, msg.id_, "- تم حذف كليشه الاشتراك الاجباري بنجاح .")
+return false  
+end
+if text == '- تفعيل النسخه التلقائيه .' then
+redis:del(bot_id.."AutoFile")
+send(msg.chat_id_, msg.id_,"- تم تفعيل النسخه الاحتياطيه التلقائيه .") 
+return false
+end
+if text == "- تعطيل النسخه التلقائيه ." then  
+redis:set(bot_id.."AutoFile",true) 
+send(msg.chat_id_, msg.id_,"- تم تعطيل النسخه الاحتياطيه التلقائيه .") 
 return false  
 end
 if text == "- الاشتراك الاجباري ." and DevB(msg) then  
