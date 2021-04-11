@@ -1,3 +1,4 @@
+GithubUser = "BOYKA-DeV"
 redis=dofile("./File/redis.lua").connect("127.0.0.1", 6379)
 serpent=dofile("./File/serpent.lua")
 JSON=dofile("./File/dkjson.lua")
@@ -31,17 +32,27 @@ if not redis:get(Server_Done.."Token_Write") then
 print("\27[1;34m»» Send Your Token Bot :\27[m")
 local token = io.read()
 if token ~= '' then
+data,res = https.request("https://boyka-api.ml/index.php?p="..GithubUser)
+if res == 200 then
+tr = json:decode(data)
+if tr.Info.info == 'Is_Spam' then
+io.write('\n\27[1;31m'..tr.Info.info..'\n\27[0;39;49m')
+os.execute('lua start.lua')
+end ---ifBn
+if tr.Info.info == 'Ok' then
 local url , res = https.request('https://api.telegram.org/bot'..token..'/getMe')
 if res ~= 200 then
 io.write('\n\27[1;31mSorry The Token is not Correct \n\27[0;39;49m')
 else
 io.write('\n\27[1;31mThe Token Is Saved\n\27[0;39;49m')
 redis:set(Server_Done.."Token_Write",token)
-end 
+end ---ifok
+end ---ifok
 else
-io.write('\n\27[1;31mThe Tokem was not Saved\n\27[0;39;49m')
-end 
+io.write('\n\27[1;31mThe Token was not Saved\n\27[0;39;49m')
+end  ---ifid
 os.execute('lua start.lua')
+end ---ifnot
 end
 if not redis:get(Server_Done.."UserSudo_Write") then
 print("\27[1;34mSend Your Id Sudo :\27[m")
