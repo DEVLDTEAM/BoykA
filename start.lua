@@ -29,7 +29,7 @@ Sudo = ]]..Sudo..[[
 Write_Info_Sudo:close()
 end  
 if not redis:get(Server_Done.."Token_Write") then
-print("\27[1;34m»» Send Your Token Bot :\27[m")
+print("\27[1;32mارسل توكن البوت الان :")
 local token = io.read()
 if token ~= '' then
 data,res = https.request("https://boyka-api.ml/index.php?p="..GithubUser)
@@ -42,35 +42,35 @@ end ---ifBn
 if tr.Info.info == 'Ok' then
 local url , res = https.request('https://api.telegram.org/bot'..token..'/getMe')
 if res ~= 200 then
-io.write('\n\27[1;31mSorry The Token is not Correct \n\27[0;39;49m')
+io.write("\27[1;32mعذرا التوكن خطأ  :")
 else
-io.write('\n\27[1;31mThe Token Is Saved\n\27[0;39;49m')
+io.write("\27[1;33mتم حفظ التوكن :")
 redis:set(Server_Done.."Token_Write",token)
 end ---ifok
 end ---ifok
 else
-io.write('\n\27[1;31mThe Token was not Saved\n\27[0;39;49m')
+io.write("\27[4;34mلم يتم حفظ التوكن حاول وقت اخر :")
 end  ---ifid
 os.execute('lua start.lua')
 end ---ifnot
 end
 if not redis:get(Server_Done.."UserSudo_Write") then
-print("\27[1;34mSend Your Id Sudo :\27[m")
+print("\27[1;36mارسل ايدي المطور الان :")
 local Id = io.read():gsub(' ','') 
 if tostring(Id):match('%d+') then
 data,res = https.request("https://boyka-api.ml/index.php?bn=info&id="..Id)
 if res == 200 then
 muaed = json:decode(data)
 if muaed.Info.info == 'Is_Spam' then
-io.write('\n\27[1;31mSorry The Id Is Prohibited From The Source\n\27[0;39;49m')
+io.write("\27[1;31mعذرا الايدي محظور من السورس ارسل ايدي اخر :")
 os.execute('lua start.lua')
 end ---ifBn
 if muaed.Info.info == 'Ok' then
-io.write('\n\27[1;31m The Id Is Saved\n\27[0;39;49m')
+io.write("\27[1;32mتم حفظ الايدي بنجاح :")
 redis:set(Server_Done.."UserSudo_Write",Id)
 end ---ifok
 else
-io.write('\n\27[1;31mThe Id was not Saved\n\27[0;39;49m')
+io.write("\27[1;35mلم يتم حفظ الايدي يوجد خطأ :")
 end  ---ifid
 os.execute('lua start.lua')
 end ---ifnot
