@@ -4,8 +4,8 @@ install() {
 rm -rf $HOME/.telegram-cli
 sudo chmod +x tg
 chmod +x BoykA
-chmod +x ts
-./ts
+chmod +x BA
+./BA
 }
 get() {
 rm -fr BoykA.lua
