@@ -7029,7 +7029,92 @@ if text == "تفعيل الافلام" and Owner(msg) then
 send(msg.chat_id_, msg.id_,'⌯ تم تفعيل الافلام')
 redis:set(bot_id.."movie_bot"..msg.chat_id_,"open")
 end
-
+if text and not redis:get(bot_id.."AutoFile") then
+Time = redis:get(bot_id.."AutoFile:Time")
+if Time then 
+if Time ~= os.date("%x") then  
+local list = redis:smembers(bot_id..'Chek:Groups')  
+local t = '{"BOT_ID": '..bot_id..',"GP_BOT":{'  
+for k,v in pairs(list) do   
+NAME = 'chat'
+ASAS = redis:smembers(bot_id.."Basic:Constructor"..v)
+MNSH = redis:smembers(bot_id.."Constructor"..v)
+MDER = redis:smembers(bot_id.."Manager"..v)
+MOD = redis:smembers(bot_id.."Mod:User"..v)
+link = redis:get(bot_id.."Link_Group"..v) or ''
+if k == 1 then
+t = t..'"'..v..'":{"BOYKA":"'..NAME..'",'
+else
+t = t..',"'..v..'":{"BOYKA":"'..NAME..'",'
+end
+if #ASAS ~= 0 then 
+t = t..'"ASAS":['
+for k,v in pairs(ASAS) do
+if k == 1 then
+t =  t..'"'..v..'"'
+else
+t =  t..',"'..v..'"'
+end
+end   
+t = t..'],'
+end
+if #MOD ~= 0 then
+t = t..'"MOD":['
+for k,v in pairs(MOD) do
+if k == 1 then
+t =  t..'"'..v..'"'
+else
+t =  t..',"'..v..'"'
+end
+end   
+t = t..'],'
+end
+if #MDER ~= 0 then
+t = t..'"MDER":['
+for k,v in pairs(MDER) do
+if k == 1 then
+t =  t..'"'..v..'"'
+else
+t =  t..',"'..v..'"'
+end
+end   
+t = t..'],'
+end
+if #MNSH ~= 0 then
+t = t..'"MNSH":['
+for k,v in pairs(MNSH) do
+if k == 1 then
+t =  t..'"'..v..'"'
+else
+t =  t..',"'..v..'"'
+end
+end   
+t = t..'],'
+end
+t = t..'"linkgroup":"'..link..'"}' or ''
+end
+if #memo ~= 0 then 
+t = t..'"mem":['
+for k,v in pairs(memo) do
+if k == 1 then
+t =  t..'"'..v..'"'
+else
+t =  t..',"'..v..'"'
+end
+end   
+t = t..'],'
+end
+t = t..'}}'
+local File = io.open('./File/'..bot_id..'.json', "w")
+File:write(t)
+File:close()
+sendDocument(Id_Sudo, msg.id_,'./File/'..bot_id..'.json', '✫:  عدد مجموعات التي في البوت { '..#list..'} .\n✫: عدد المشتركين { '..#memo..' } .')
+redis:set(bot_id.."AutoFile:Time",os.date("%x"))
+end
+else 
+redis:set(bot_id.."AutoFile:Time",os.date("%x"))
+end
+end
 if text and text:match("^فلم (.*)$") and redis:get(bot_id.."movie_bot"..msg.chat_id_) == "open" then
 local Textm = text:match("^فلم (.*)$")
 data,res = https.request('https://boyka-api.ml/movie.php?serch='..URL.escape(Textm)..'')
@@ -7171,92 +7256,6 @@ if text =='الاحصائيات' and DevBot(msg) then
 local Groups = redis:scard(bot_id..'Chek:Groups')  
 local Users = redis:scard(bot_id..'UsersBot')  
 send(msg.chat_id_, msg.id_,'✫: احصائيات البوت \n\n✫:  عدد المجموعات *~ '..Groups..'\n✫:  عدد المشتركين ~ '..Users..'*')
-end
-if text and not redis:get(bot_id.."AutoFile") then
-Time = redis:get(bot_id.."AutoFile:Time")
-if Time then 
-if Time ~= os.date("%x") then  
-local list = redis:smembers(bot_id..'Chek:Groups')  
-local t = '{"BOT_ID": '..bot_id..',"GP_BOT":{'  
-for k,v in pairs(list) do   
-NAME = 'chat'
-ASAS = redis:smembers(bot_id.."Basic:Constructor"..v)
-MNSH = redis:smembers(bot_id.."Constructor"..v)
-MDER = redis:smembers(bot_id.."Manager"..v)
-MOD = redis:smembers(bot_id.."Mod:User"..v)
-link = redis:get(bot_id.."Link_Group"..v) or ''
-if k == 1 then
-t = t..'"'..v..'":{"BOYKA":"'..NAME..'",'
-else
-t = t..',"'..v..'":{"BOYKA":"'..NAME..'",'
-end
-if #ASAS ~= 0 then 
-t = t..'"ASAS":['
-for k,v in pairs(ASAS) do
-if k == 1 then
-t =  t..'"'..v..'"'
-else
-t =  t..',"'..v..'"'
-end
-end   
-t = t..'],'
-end
-if #MOD ~= 0 then
-t = t..'"MOD":['
-for k,v in pairs(MOD) do
-if k == 1 then
-t =  t..'"'..v..'"'
-else
-t =  t..',"'..v..'"'
-end
-end   
-t = t..'],'
-end
-if #MDER ~= 0 then
-t = t..'"MDER":['
-for k,v in pairs(MDER) do
-if k == 1 then
-t =  t..'"'..v..'"'
-else
-t =  t..',"'..v..'"'
-end
-end   
-t = t..'],'
-end
-if #MNSH ~= 0 then
-t = t..'"MNSH":['
-for k,v in pairs(MNSH) do
-if k == 1 then
-t =  t..'"'..v..'"'
-else
-t =  t..',"'..v..'"'
-end
-end   
-t = t..'],'
-end
-t = t..'"linkgroup":"'..link..'"}' or ''
-end
-if #memo ~= 0 then 
-t = t..'"mem":['
-for k,v in pairs(memo) do
-if k == 1 then
-t =  t..'"'..v..'"'
-else
-t =  t..',"'..v..'"'
-end
-end   
-t = t..'],'
-end
-t = t..'}}'
-local File = io.open('./File/'..bot_id..'.json', "w")
-File:write(t)
-File:close()
-sendDocument(Id_Sudo, msg.id_,'./File/'..bot_id..'.json', '✫:  عدد مجموعات التي في البوت { '..#list..'} .\n✫: عدد المشتركين { '..#memo..' } .')
-redis:set(bot_id.."AutoFile:Time",os.date("%x"))
-end
-else 
-redis:set(bot_id.."AutoFile:Time",os.date("%x"))
-end
 end
 if text == 'جلب نسخه احتياطيه' and DevB(msg) then
 local list = redis:smembers(bot_id..'Chek:Groups')  
