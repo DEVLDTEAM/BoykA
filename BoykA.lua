@@ -14,19 +14,17 @@ IP = io.popen("dig +short myip.opendns.com @resolver1.opendns.com"):read('*a')
 name = io.popen("uname -a | awk '{ name = $2 } END { print name }'"):read('*a')
 port = io.popen("echo ${SSH_CLIENT} | awk '{ port = $3 } END { print port }'"):read('*a')
 Rtime = io.popen("date +'%Y-%m-%d %T'"):read('*a')
-print("\27[34m"..[[
-Installation information
-
-User :: ]]..User..[[
-
-IP :: ]]..IP..[[
-
-name :: ]]..name..[[
-
-port :: ]]..port..[[
-
-time ::]]..Rtime.."\27[m")
-
+print("\27[34m"..[[┏┓━━━━━━━━━━━┏┓━━━━━━━━
+┃┃━━━━━━━━━━━┃┃━━━━━━━━
+┃┗━┓┏━━┓┏┓━┏┓┃┃┏┓┏━━┓         
+┃┏┓┃┃┏┓┃┃┃━┃┃┃┗┛┛┗━┓┃        
+┃┗┛┃┃┗┛┃┃┗━┛┃┃┏┓┓┃┗┛┗┓  
+┗━━┛┗━━┛┗━┓┏┛┗┛┗┛┗━━━┛ 
+━━━━━━━━┏━┛┃━━━━━━━━━━           
+━━━━━━━━┗━━┛━━━━━━━━━━━
+ > CH › @pvv_v
+> CH › @BOBBW
+~> DEVELOPER › @KKKKK4]].."\27[m")
 io.popen("mkdir Files")
 t = "\27[35m".."\nAll Files Started : \n____________________\n"..'\27[m'
 i = 0
@@ -8490,27 +8488,29 @@ end
 if Chat_Type == 'UserBot' then
 if text == '/start' then  
 if DevBoykA(msg) then
-local Text = '✫: مرحبا بك في اوامر المطور الجاهزه'
+local Text = '✫: مرحبا . \n✫:  يمكنك استخدام الاعدادات الخاصه بالبوت الان .'
 local keyboard = {
-{'تفعيل النسخه التلقائيه ✫','تعطيل النسخه التلقائيه ✫'},
+{'✫: قناه تحديثات البوت .'},
 {'الاحصائيات ✫','تغيير المطور الاساسي ✫'},
 {'تفعيل التواصل ✫','تعطيل التواصل ✫'},
 {'تنظيف الكروبات ✫','تنظيف المشتركين ✫'},
 {'تفعيل البوت الخدمي ✫','تعطيل البوت الخدمي ✫'},
-{'اذاعه خاص ✫','المطورين ✫','اذاعه ✫'},
-{'اذاعه بالتوجيه ✫','اذاعه بالتوجيه خاص ✫'},
 {'تفعيل الاذاعه ✫','تعطيل الاذاعه ✫'},
+{'اذاعه خاص ✫','اذاعه ✫'},
+{'اذاعه بالتوجيه ✫','اذاعه بالتوجيه خاص ✫'},
 {'تفعيل المغادره ✫','تعطيل المغادره ✫'},
-{'مسح قائمه العام ✫','مسح المطورين ✫'},
+{'المطورين ✫','مسح المطورين ✫'},
+{'✫: الثانويين .','✫: مسح الثانويين .'},
+{'مسح قائمه العام ✫','قائمه العام ✫'},
 {'حذف كليشه ستارت ✫','ضع كليشه ستارت ✫'},
 {'- تعطيل الاشتراك الاجباري ✫ .'},
 {'- تغير الاشتراك ✫ .','حذف رساله الاشتراك ✫ .'},
 {'- تفعيل الاشتراك الاجباري ✫ .'},
-{'- الاشتراك الاجباري ✫ .'},
 {'- تعين قناة الاشتراك ✫ .','- تغير رساله الاشتراك ✫ .'},
+{'- الاشتراك الاجباري ✫ .'},
 {'تحديث السورس ✫','تحديث الملفات ✫'},
-{'قائمه العام ✫'},
-{'جلب نسخه احتياطيه ✫'},
+{'تفعيل النسخه التلقائيه ✫','جلب النسخه ✫','تعطيل النسخه التلقائيه ✫'},
+{'✫: تغيير اسم البوت .'},
 {'الغاء ✫'}
 }
 send_inline_key(msg.chat_id_,Text,keyboard)
@@ -8674,6 +8674,32 @@ if text == "تعطيل النسخه التلقائيه ✫" then
 database:set(bot_id.."AutoFile",true) 
 send(msg.chat_id_, msg.id_,"✫: تم تعطيل النسخه الاحتياطيه التلقائيه .") 
 return false  
+end
+if text =='✫: الثانويين .' and DevBoykA(msg) then
+local list = database:smembers(bot_id.."TSudo:User")
+t = "\n✫:  قائمة مطورين الثانويين للبوت \n — — — — — — — — — \n"
+for k,v in pairs(list) do
+local username = database:get(bot_id.."User:Name" .. v)
+if username then
+t = t..""..k.."✫: ([@"..username.."])\n"
+else
+t = t..""..k.."✫: (`"..v.."`)\n"
+end
+end
+if #list == 0 then
+t = "✫: لا يوجد مطورين ثانويين"
+end
+send(msg.chat_id_, msg.id_, t)
+end
+if text =='✫: الثانويين .' and not VIP_DeV(msg) then
+send(msg.chat_id_, msg.id_,'✫: تسرسح .')
+end
+if text =='✫: مسح الثانويين .' and VIP_DeV(msg) then
+send(msg.chat_id_, msg.id_,'✫: تم بالفعل مسح قائمه المطورين الثانوي .')
+database:del(bot_id.."TSudo:User")
+end
+if text =='✫: مسح الثانويين .' and not VIP_DeV(msg) then
+send(msg.chat_id_, msg.id_,'✫: تسرسح .')
 end
 if text =='الاحصائيات ✫' then
 local Groups = database:scard(bot_id..'Chek:Groups')  
@@ -8994,7 +9020,7 @@ t = "✫: لا يوجد مطورين"
 end
 send(msg.chat_id_, msg.id_, t)
 end
-if text == 'جلب نسخه احتياطيه ✫' then
+if text =='جلب النسخه ✫' then
 local list = database:smembers(bot_id..'Chek:Groups')  
 local memo = database:smembers(bot_id..'UsersBot')  
 local t = '{"BOT_ID": '..bot_id..',"GP_BOT":{'  
@@ -10321,7 +10347,20 @@ end
 end
 end
 if (data.ID == "UpdateOption" and data.value_.value_ == "Ready") then
-print("\27[34m"..[[>> The Bot is Running]].."\27[m")
+print("\27[34m"..[[
+>> The Bot is Running
+
+>> Installation information
+
+User :: ]]..User..[[
+
+IP :: ]]..IP..[[
+
+name :: ]]..name..[[
+
+port :: ]]..port..[[
+
+time ::]]..Rtime.."\27[m")
 local list = database:smembers(bot_id..'UsersBot')  
 for k,v in pairs(list) do 
 tdcli_function({ID='GetChat',chat_id_ = v},function(arg,data) end,nil) 
