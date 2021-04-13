@@ -6539,66 +6539,66 @@ send(msg.chat_id_, msg.id_,"\n✫: تم تعطيل الاذاعه")
 return false
 end 
 if text == "الاعدادات" and Addictive(msg) then    
-if redis:get(bot_id.."Lock:text"..msg.chat_id_) == true then
+if database:get(bot_id.."Lock:text"..msg.chat_id_) == true then
 te = "الدردشه : ❌ : بالمسح"
 else
 te =  "الدردشه :☑️"   
 end        
-if redis:get(bot_id.."Lock:AddMempar"..msg.chat_id_) == "kick" then
+if database:get(bot_id.."Lock:AddMempar"..msg.chat_id_) == "kick" then
 AddM = "الاضافه : ❌ : بالطرد"
 else
 AddM =  "الاضافه :☑️"   
 end        
-if redis:get(bot_id.."Lock:Join"..msg.chat_id_) == "kick" then
+if database:get(bot_id.."Lock:Join"..msg.chat_id_) == "kick" then
 Jo = "الدخول : ❌ : بالطرد"
 else
 Jo =  "الدخول :☑️"   
 end        
-if redis:get(bot_id.."Lock:Bot:kick"..msg.chat_id_) == "del" then
+if database:get(bot_id.."Lock:Bot:kick"..msg.chat_id_) == "del" then
 Botki = "البوتات : ❌ : بالمسح"
-elseif redis:get(bot_id.."Lock:Bot:kick:"..msg.chat_id_) == "kick" then
+elseif database:get(bot_id.."Lock:Bot:kick:"..msg.chat_id_) == "kick" then
 Botki = "البوتات : ❌ : بالطرد"
 else
 Botki =  "البوتات :☑️"   
 end        
-if redis:get(bot_id.."Lock:tagservr"..msg.chat_id_) == "del" then
+if database:get(bot_id.."Lock:tagservr"..msg.chat_id_) == "del" then
 tag = "الاشعارات : ❌ : بالمسح"
 else
 tag =  "الاشعارات :☑️"   
 end        
-if redis:get(bot_id.."lockpin"..msg.chat_id_) == true then
+if database:get(bot_id.."lockpin"..msg.chat_id_) == true then
 pin = "التثبيت : ❌ : بالمسح"
 else
 pin =  "التثبيت :☑️"   
 end        
-if redis:get(bot_id.."Lock:edit"..msg.chat_id_) == true then
+if database:get(bot_id.."Lock:edit"..msg.chat_id_) == true then
 edit = "التعديل : ❌ : بالمسح"
 else
 edit =  "التعديل :☑️"   
 end        
-if redis:get(bot_id.."Lock:edit"..msg.chat_id_) == true then
+if database:get(bot_id.."Lock:edit"..msg.chat_id_) == true then
 edi = "تعديل الميديا : ❌ : بالمسح"
 else
 edi =  "تعديل الميديا :☑️"   
 end        
-if redis:get(bot_id.."Lock:Link"..msg.chat_id_) == "del" then
+if database:get(bot_id.."Lock:Link"..msg.chat_id_) == "del" then
 Link = "الروابط : ❌ : بالمسح"
-elseif redis:get(bot_id.."Lock:Link:"..msg.chat_id_) == "kick" then
+elseif database:get(bot_id.."Lock:Link:"..msg.chat_id_) == "kick" then
 Link = "الروابط : ❌ : بالطرد"
-elseif redis:get(bot_id.."Lock:Link:"..msg.chat_id_) == "ktm" then
+elseif database:get(bot_id.."Lock:Link:"..msg.chat_id_) == "ktm" then
 Link = "الروابط : ❌ : بالكتم"
-elseif redis:get(bot_id.."Lock:Link:"..msg.chat_id_) == "ked" then
+elseif database:get(bot_id.."Lock:Link:"..msg.chat_id_) == "ked" then
 Link = "الروابط : ❌ : بالتقييد"
 else
 Link =  "الروابط :☑️"   
 end        
-if redis:get(bot_id.."Lock:User:Name"..msg.chat_id_) == "del" then
+if database:get(bot_id.."Lock:User:Name"..msg.chat_id_) == "del" then
 usNa = "المعرفات : ❌ : بالمسح"
-elseif redis:get(bot_id.."Lock:User:Name:"..msg.chat_id_) == "kick" then
+elseif database:get(bot_id.."Lock:User:Name:"..msg.chat_id_) == "kick" then
 usNa = "المعرفات : ❌ : بالطرد"
-elseif redis:get(bot_id.."Lock:User:Name:"..msg.chat_id_) == "ktm" then
+elseif database:get(bot_id.."Lock:User:Name:"..msg.chat_id_) == "ktm" then
 usNa = "المعرفات : ❌ : بالكتم"
-elseif redis:get(bot_id.."Lock:User:Name:"..msg.chat_id_) == "ked" then
+elseif database:get(bot_id.."Lock:User:Name:"..msg.chat_id_) == "ked" then
 usNa = "المعرفات : ❌ : بالتقييد"
 else
 usNa =  "المعرفات :☑️"   
@@ -9107,66 +9107,66 @@ sender_id  = DAata:match("(%d+)")
 ta = DAata:gsub(data.sender_user_id_,'')
 if ta == "LS0" then   ---LS0
 if tonumber(data.sender_user_id_) == tonumber(sender_id) then
-if redis:get(bot_id.."Lock:text"..Chat_id) == true then
+if database:get(bot_id.."Lock:text"..Chat_id) == true then
 te = "الدردشه : ❌ : بالمسح"
 else
 te =  "الدردشه :☑️"   
 end        
-if redis:get(bot_id.."Lock:AddMempar"..Chat_id) == "kick" then
+if database:get(bot_id.."Lock:AddMempar"..Chat_id) == "kick" then
 AddM = "الاضافه : ❌ : بالطرد"
 else
 AddM =  "الاضافه :☑️"   
 end        
-if redis:get(bot_id.."Lock:Join"..Chat_id) == "kick" then
+if database:get(bot_id.."Lock:Join"..Chat_id) == "kick" then
 Jo = "الدخول : ❌ : بالطرد"
 else
 Jo =  "الدخول :☑️"   
 end        
-if redis:get(bot_id.."Lock:Bot:kick"..Chat_id) == "del" then
+if database:get(bot_id.."Lock:Bot:kick"..Chat_id) == "del" then
 Botki = "البوتات : ❌ : بالمسح"
-elseif redis:get(bot_id.."Lock:Bot:kick:"..Chat_id) == "kick" then
+elseif database:get(bot_id.."Lock:Bot:kick:"..Chat_id) == "kick" then
 Botki = "البوتات : ❌ : بالطرد"
 else
 Botki =  "البوتات :☑️"   
 end        
-if redis:get(bot_id.."Lock:tagservr"..Chat_id) == "del" then
+if database:get(bot_id.."Lock:tagservr"..Chat_id) == "del" then
 tag = "الاشعارات : ❌ : بالمسح"
 else
 tag =  "الاشعارات :☑️"   
 end        
-if redis:get(bot_id.."lockpin"..Chat_id) == true then
+if database:get(bot_id.."lockpin"..Chat_id) == true then
 pin = "التثبيت : ❌ : بالمسح"
 else
 pin =  "التثبيت :☑️"   
 end        
-if redis:get(bot_id.."Lock:edit"..Chat_id) == true then
+if database:get(bot_id.."Lock:edit"..Chat_id) == true then
 edit = "التعديل : ❌ : بالمسح"
 else
 edit =  "التعديل :☑️"   
 end        
-if redis:get(bot_id.."Lock:edit"..Chat_id) == true then
+if database:get(bot_id.."Lock:edit"..Chat_id) == true then
 edi = "تعديل الميديا : ❌ : بالمسح"
 else
 edi =  "تعديل الميديا :☑️"   
 end        
-if redis:get(bot_id.."Lock:Link"..Chat_id) == "del" then
+if database:get(bot_id.."Lock:Link"..Chat_id) == "del" then
 Link = "الروابط : ❌ : بالمسح"
-elseif redis:get(bot_id.."Lock:Link:"..Chat_id) == "kick" then
+elseif database:get(bot_id.."Lock:Link:"..Chat_id) == "kick" then
 Link = "الروابط : ❌ : بالطرد"
-elseif redis:get(bot_id.."Lock:Link:"..Chat_id) == "ktm" then
+elseif database:get(bot_id.."Lock:Link:"..Chat_id) == "ktm" then
 Link = "الروابط : ❌ : بالكتم"
-elseif redis:get(bot_id.."Lock:Link:"..Chat_id) == "ked" then
+elseif database:get(bot_id.."Lock:Link:"..Chat_id) == "ked" then
 Link = "الروابط : ❌ : بالتقييد"
 else
 Link =  "الروابط :☑️"   
 end        
-if redis:get(bot_id.."Lock:User:Name"..Chat_id) == "del" then
+if database:get(bot_id.."Lock:User:Name"..Chat_id) == "del" then
 usNa = "المعرفات : ❌ : بالمسح"
-elseif redis:get(bot_id.."Lock:User:Name:"..Chat_id) == "kick" then
+elseif database:get(bot_id.."Lock:User:Name:"..Chat_id) == "kick" then
 usNa = "المعرفات : ❌ : بالطرد"
-elseif redis:get(bot_id.."Lock:User:Name:"..Chat_id) == "ktm" then
+elseif database:get(bot_id.."Lock:User:Name:"..Chat_id) == "ktm" then
 usNa = "المعرفات : ❌ : بالكتم"
-elseif redis:get(bot_id.."Lock:User:Name:"..Chat_id) == "ked" then
+elseif database:get(bot_id.."Lock:User:Name:"..Chat_id) == "ked" then
 usNa = "المعرفات : ❌ : بالتقييد"
 else
 usNa =  "المعرفات :☑️"   
@@ -9189,144 +9189,144 @@ sender_id  = DAata:match("(%d+)")
 ta = DAata:gsub(data.sender_user_id_,'')
 if ta == "LS1" then   ---LS1
 if tonumber(data.sender_user_id_) == tonumber(sender_id) then
-if redis:get(bot_id.."lock:Fshar"..Chat_id) == true then
+if database:get(bot_id.."lock:Fshar"..Chat_id) == true then
 ar = "الفارسيه : ❌ : بالمسح"
 else
 ar =  "الفارسيه :☑️"   
 end        
-if redis:get(bot_id.."lock:Fshar"..Chat_id) == true then
+if database:get(bot_id.."lock:Fshar"..Chat_id) == true then
 arw = "الفشار : ❌ : بالمسح"
 else
 arw =  "الفشار :☑️"   
 end        
-if redis:hget(bot_id.."flooding:settings:"..Chat_id, "flood") == "kick" then     
+if database:hget(bot_id.."flooding:settings:"..Chat_id, "flood") == "kick" then     
 flood = "التكرار : ❌ : بالطرد"
-elseif redis:hget(bot_id.."flooding:settings:"..Chat_id,"flood") == "keed" then     
+elseif database:hget(bot_id.."flooding:settings:"..Chat_id,"flood") == "keed" then     
 flood = "التكرار : ❌ : بالتقييد"
-elseif redis:hget(bot_id.."flooding:settings:"..Chat_id,"flood") == "mute" then     
+elseif database:hget(bot_id.."flooding:settings:"..Chat_id,"flood") == "mute" then     
 flood = "التكرار : ❌ : بالكتم"
-elseif redis:hget(bot_id.."flooding:settings:"..Chat_id,"flood") == "del" then     
+elseif database:hget(bot_id.."flooding:settings:"..Chat_id,"flood") == "del" then     
 flood = "التكرار : ❌ : بالمسح"
 else     
 flood =  "التكرار :☑️"   
 end
-if redis:get(bot_id.."Lock:hashtak"..Chat_id) == "del" then
+if database:get(bot_id.."Lock:hashtak"..Chat_id) == "del" then
 ash = "التاك : ❌ : بالمسح"
-elseif redis:get(bot_id.."Lock:hashtak"..Chat_id) == "ked" then 
+elseif database:get(bot_id.."Lock:hashtak"..Chat_id) == "ked" then 
 ash = "التاك : ❌ : بالتقييد"
-elseif redis:get(bot_id.."Lock:hashtak"..Chat_id) == "ktm" then 
+elseif database:get(bot_id.."Lock:hashtak"..Chat_id) == "ktm" then 
 ash = "التاك : ❌ : بالكتم"
-elseif redis:get(bot_id.."Lock:hashtak"..Chat_id) == "kick" then 
+elseif database:get(bot_id.."Lock:hashtak"..Chat_id) == "kick" then 
 ash = "التاك : ❌ : بالطرد"
 else
 ash =  "التاك :☑️"   
 end    
-if redis:get(bot_id.."Lock:Cmd"..Chat_id) == "del" then
+if database:get(bot_id.."Lock:Cmd"..Chat_id) == "del" then
 Cmd = "الشارحه : ❌ : بالمسح"
-elseif redis:get(bot_id.."Lock:Cmd"..Chat_id) == "ked" then 
+elseif database:get(bot_id.."Lock:Cmd"..Chat_id) == "ked" then 
 Cmd = "الشارحه : ❌ : بالتقييد"
-elseif redis:get(bot_id.."Lock:Cmd"..Chat_id) == "ktm" then 
+elseif database:get(bot_id.."Lock:Cmd"..Chat_id) == "ktm" then 
 Cmd = "الشارحه : ❌ : بالكتم"
-elseif redis:get(bot_id.."Lock:Cmd"..Chat_id) == "kick" then 
+elseif database:get(bot_id.."Lock:Cmd"..Chat_id) == "kick" then 
 Cmd = "الشارحه : ❌ : بالطرد"
 else
 Cmd =  "الشارحه :☑️"   
 end    
-if redis:get(bot_id.."Lock:Photo"..Chat_id) == "del" then
+if database:get(bot_id.."Lock:Photo"..Chat_id) == "del" then
 hot = "الصور : ❌ : بالمسح"
-elseif redis:get(bot_id.."Lock:Photo"..Chat_id) == "ked" then 
+elseif database:get(bot_id.."Lock:Photo"..Chat_id) == "ked" then 
 hot = "الصور : ❌ : بالتقييد"
-elseif redis:get(bot_id.."Lock:Photo"..Chat_id) == "ktm" then 
+elseif database:get(bot_id.."Lock:Photo"..Chat_id) == "ktm" then 
 hot = "الصور : ❌ : بالكتم"
-elseif redis:get(bot_id.."Lock:Photo"..Chat_id) == "kick" then 
+elseif database:get(bot_id.."Lock:Photo"..Chat_id) == "kick" then 
 hot = "الصور : ❌ : بالطرد"
 else
 hot =  "الصور :☑️"   
 end    
-if redis:get(bot_id.."Lock:Video"..Chat_id) == "del" then
+if database:get(bot_id.."Lock:Video"..Chat_id) == "del" then
 de = "الفيديو : ❌ : بالمسح"
-elseif redis:get(bot_id.."Lock:Video"..Chat_id) == "ked" then 
+elseif database:get(bot_id.."Lock:Video"..Chat_id) == "ked" then 
 de = "الفيديو : ❌ : بالتقييد"
-elseif redis:get(bot_id.."Lock:Video"..Chat_id) == "ktm" then 
+elseif database:get(bot_id.."Lock:Video"..Chat_id) == "ktm" then 
 de = "الفيديو : ❌ : بالكتم"
-elseif redis:get(bot_id.."Lock:Video"..Chat_id) == "kick" then 
+elseif database:get(bot_id.."Lock:Video"..Chat_id) == "kick" then 
 de = "الفيديو : ❌ : بالطرد"
 else
 de =  "الفيديو :☑️"   
 end    
-if redis:get(bot_id.."Lock:Animation"..Chat_id) == "del" then
+if database:get(bot_id.."Lock:Animation"..Chat_id) == "del" then
 Anima = "المتحركه : ❌ : بالمسح"
-elseif redis:get(bot_id.."Lock:Animation"..Chat_id) == "ked" then 
+elseif database:get(bot_id.."Lock:Animation"..Chat_id) == "ked" then 
 Anima = "المتحركه : ❌ : بالتقييد"
-elseif redis:get(bot_id.."Lock:Animation"..Chat_id) == "ktm" then 
+elseif database:get(bot_id.."Lock:Animation"..Chat_id) == "ktm" then 
 Anima = "المتحركه : ❌ : بالكتم"
-elseif redis:get(bot_id.."Lock:Animation"..Chat_id) == "kick" then 
+elseif database:get(bot_id.."Lock:Animation"..Chat_id) == "kick" then 
 Anima = "المتحركه : ❌ : بالطرد"
 else
 Anima =  "المتحركه :☑️"   
 end    
-if redis:get(bot_id.."Lock:Audio"..Chat_id) == "del" then
+if database:get(bot_id.."Lock:Audio"..Chat_id) == "del" then
 Audi = "الاغاني : ❌ : بالمسح"
-elseif redis:get(bot_id.."Lock:Audio"..Chat_id) == "ked" then 
+elseif database:get(bot_id.."Lock:Audio"..Chat_id) == "ked" then 
 Audi = "الاغاني : ❌ : بالتقييد"
-elseif redis:get(bot_id.."Lock:Audio"..Chat_id) == "ktm" then 
+elseif database:get(bot_id.."Lock:Audio"..Chat_id) == "ktm" then 
 Audi = "الاغاني : ❌ : بالكتم"
-elseif redis:get(bot_id.."Lock:Audio"..Chat_id) == "kick" then 
+elseif database:get(bot_id.."Lock:Audio"..Chat_id) == "kick" then 
 Audi = "الاغاني : ❌ : بالطرد"
 else
 Audi =  "الاغاني :☑️"   
 end    
-if redis:get(bot_id.."Lock:vico"..Chat_id) == "del" then
+if database:get(bot_id.."Lock:vico"..Chat_id) == "del" then
 vico = "الاغاني : ❌ : بالمسح"
-elseif redis:get(bot_id.."Lock:vico"..Chat_id) == "ked" then 
+elseif database:get(bot_id.."Lock:vico"..Chat_id) == "ked" then 
 vico = "الاغاني : ❌ : بالتقييد"
-elseif redis:get(bot_id.."Lock:vico"..Chat_id) == "ktm" then 
+elseif database:get(bot_id.."Lock:vico"..Chat_id) == "ktm" then 
 vico = "الاغاني : ❌ : بالكتم"
-elseif redis:get(bot_id.."Lock:vico"..Chat_id) == "kick" then 
+elseif database:get(bot_id.."Lock:vico"..Chat_id) == "kick" then 
 vico = "الاغاني : ❌ : بالطرد"
 else
 vico =  "الاغاني :☑️"   
 end    
-if redis:get(bot_id.."Lock:Keyboard"..Chat_id) == "del" then
+if database:get(bot_id.."Lock:Keyboard"..Chat_id) == "del" then
 Keyboard = "الكيبورد : ❌ : بالمسح"
-elseif redis:get(bot_id.."Lock:Keyboard"..Chat_id) == "ked" then 
+elseif database:get(bot_id.."Lock:Keyboard"..Chat_id) == "ked" then 
 Keyboard = "الكيبورد : ❌ : بالتقييد"
-elseif redis:get(bot_id.."Lock:Keyboard"..Chat_id) == "ktm" then 
+elseif database:get(bot_id.."Lock:Keyboard"..Chat_id) == "ktm" then 
 Keyboard = "الكيبورد : ❌ : بالكتم"
-elseif redis:get(bot_id.."Lock:Keyboard"..Chat_id) == "kick" then 
+elseif database:get(bot_id.."Lock:Keyboard"..Chat_id) == "kick" then 
 Keyboard = "الكيبورد : ❌ : بالطرد"
 else
 Keyboard =  "الكيبورد :☑️"   
 end    
-if redis:get(bot_id.."Lock:Sticker"..Chat_id) == "del" then
+if database:get(bot_id.."Lock:Sticker"..Chat_id) == "del" then
 Sti = "الملصقات : ❌ : بالمسح"
-elseif redis:get(bot_id.."Lock:Sticker"..Chat_id) == "ked" then 
+elseif database:get(bot_id.."Lock:Sticker"..Chat_id) == "ked" then 
 Sti = "الملصقات : ❌ : بالتقييد"
-elseif redis:get(bot_id.."Lock:Sticker"..Chat_id) == "ktm" then 
+elseif database:get(bot_id.."Lock:Sticker"..Chat_id) == "ktm" then 
 Sti = "الملصقات : ❌ : بالكتم"
-elseif redis:get(bot_id.."Lock:Sticker"..Chat_id) == "kick" then 
+elseif database:get(bot_id.."Lock:Sticker"..Chat_id) == "kick" then 
 Sti = "الملصقات : ❌ : بالطرد"
 else
 Sti =  "الملصقات :☑️"   
 end    
-if redis:get(bot_id.."Lock:forward"..Chat_id) == "del" then
+if database:get(bot_id.."Lock:forward"..Chat_id) == "del" then
 orwa = "التوجيه : ❌ : بالمسح"
-elseif redis:get(bot_id.."Lock:forward"..Chat_id) == "ked" then 
+elseif database:get(bot_id.."Lock:forward"..Chat_id) == "ked" then 
 orwa = "التوجيه : ❌ : بالتقييد"
-elseif redis:get(bot_id.."Lock:forward"..Chat_id) == "ktm" then 
+elseif database:get(bot_id.."Lock:forward"..Chat_id) == "ktm" then 
 orwa = "التوجيه : ❌ : بالكتم"
-elseif redis:get(bot_id.."Lock:forward"..Chat_id) == "kick" then 
+elseif database:get(bot_id.."Lock:forward"..Chat_id) == "kick" then 
 orwa = "التوجيه : ❌ : بالطرد"
 else
 orwa =  "التوجيه :☑️"   
 end    
-if redis:get(bot_id.."Lock:Document"..Chat_id) == "del" then
+if database:get(bot_id.."Lock:Document"..Chat_id) == "del" then
 Docu = "الملفات : ❌ : بالمسح"
-elseif redis:get(bot_id.."Lock:Document"..Chat_id) == "ked" then 
+elseif database:get(bot_id.."Lock:Document"..Chat_id) == "ked" then 
 Docu = "الملفات : ❌ : بالتقييد"
-elseif redis:get(bot_id.."Lock:Document"..Chat_id) == "ktm" then 
+elseif database:get(bot_id.."Lock:Document"..Chat_id) == "ktm" then 
 Docu = "الملفات : ❌ : بالكتم"
-elseif redis:get(bot_id.."Lock:Document"..Chat_id) == "kick" then 
+elseif database:get(bot_id.."Lock:Document"..Chat_id) == "kick" then 
 Docu = "الملفات : ❌ : بالطرد"
 else
 Docu =  "الملفات :☑️"   
@@ -9351,73 +9351,73 @@ sender_id  = DAata:match("(%d+)")
 ta = DAata:gsub(data.sender_user_id_,'')
 if ta == "LS2" then   ---LS2
 if tonumber(data.sender_user_id_) == tonumber(sender_id) then
-if redis:get(bot_id.."Lock:Unsupported"..Chat_id) == "del" then
+if database:get(bot_id.."Lock:Unsupported"..Chat_id) == "del" then
 rted = "السيلفي : ❌ : بالمسح"
-elseif redis:get(bot_id.."Lock:Unsupported"..Chat_id) == "ked" then 
+elseif database:get(bot_id.."Lock:Unsupported"..Chat_id) == "ked" then 
 rted = "السيلفي : ❌ : بالتقييد"
-elseif redis:get(bot_id.."Lock:Unsupported"..Chat_id) == "ktm" then 
+elseif database:get(bot_id.."Lock:Unsupported"..Chat_id) == "ktm" then 
 rted = "السيلفي : ❌ : بالكتم"
-elseif redis:get(bot_id.."Lock:Unsupported"..Chat_id) == "kick" then 
+elseif database:get(bot_id.."Lock:Unsupported"..Chat_id) == "kick" then 
 rted = "السيلفي : ❌ : بالطرد"
 else
 rted =  "السيلفي :☑️"   
 end    
-if redis:get(bot_id.."Lock:Markdaun"..Chat_id) == "del" then
+if database:get(bot_id.."Lock:Markdaun"..Chat_id) == "del" then
 daun = "الماركداون : ❌ : بالمسح"
-elseif redis:get(bot_id.."Lock:Markdaun"..Chat_id) == "ked" then 
+elseif database:get(bot_id.."Lock:Markdaun"..Chat_id) == "ked" then 
 daun = "الماركداون : ❌ : بالتقييد"
-elseif redis:get(bot_id.."Lock:Markdaun"..Chat_id) == "ktm" then 
+elseif database:get(bot_id.."Lock:Markdaun"..Chat_id) == "ktm" then 
 daun = "الماركداون : ❌ : بالكتم"
-elseif redis:get(bot_id.."Lock:Markdaun"..Chat_id) == "kick" then 
+elseif database:get(bot_id.."Lock:Markdaun"..Chat_id) == "kick" then 
 daun = "الماركداون : ❌ : بالطرد"
 else
 daun =  "الماركداون :☑️"   
 end   
-if redis:get(bot_id.."Lock:geam"..Chat_id) == "del" then
+if database:get(bot_id.."Lock:geam"..Chat_id) == "del" then
 eam = "الالعاب : ❌ : بالمسح"
-elseif redis:get(bot_id.."Lock:geam"..Chat_id) == "ked" then 
+elseif database:get(bot_id.."Lock:geam"..Chat_id) == "ked" then 
 eam = "الالعاب : ❌ : بالتقييد"
-elseif redis:get(bot_id.."Lock:geam"..Chat_id) == "ktm" then 
+elseif database:get(bot_id.."Lock:geam"..Chat_id) == "ktm" then 
 eam = "الالعاب : ❌ : بالكتم"
-elseif redis:get(bot_id.."Lock:geam"..Chat_id) == "kick" then 
+elseif database:get(bot_id.."Lock:geam"..Chat_id) == "kick" then 
 eam = "الالعاب : ❌ : بالطرد"
 else
 eam =  "الالعاب :☑️"   
 end    
-if redis:get(bot_id.."Lock:Spam"..Chat_id) == "del" then
+if database:get(bot_id.."Lock:Spam"..Chat_id) == "del" then
 pam = "الكلايش : ❌ : بالمسح"
-elseif redis:get(bot_id.."Lock:Spam"..Chat_id) == "ked" then 
+elseif database:get(bot_id.."Lock:Spam"..Chat_id) == "ked" then 
 pam = "الكلايش : ❌ : بالتقييد"
-elseif redis:get(bot_id.."Lock:Spam"..Chat_id) == "ktm" then 
+elseif database:get(bot_id.."Lock:Spam"..Chat_id) == "ktm" then 
 pam = "الكلايش : ❌ : بالكتم"
-elseif redis:get(bot_id.."Lock:Spam"..Chat_id) == "kick" then 
+elseif database:get(bot_id.."Lock:Spam"..Chat_id) == "kick" then 
 pam = "الكلايش : ❌ : بالطرد"
 else
 pam =  "الكلايش :☑️"   
 end    
-if redis:get(bot_id.."Lock:Contact"..Chat_id) == "del" then
+if database:get(bot_id.."Lock:Contact"..Chat_id) == "del" then
 tact = "الجهات : ❌ : بالمسح"
-elseif redis:get(bot_id.."Lock:Contact"..Chat_id) == "ked" then 
+elseif database:get(bot_id.."Lock:Contact"..Chat_id) == "ked" then 
 tact = "الجهات : ❌ : بالتقييد"
-elseif redis:get(bot_id.."Lock:Contact"..Chat_id) == "ktm" then 
+elseif database:get(bot_id.."Lock:Contact"..Chat_id) == "ktm" then 
 tact = "الجهات : ❌ : بالكتم"
-elseif redis:get(bot_id.."Lock:Contact"..Chat_id) == "kick" then 
+elseif database:get(bot_id.."Lock:Contact"..Chat_id) == "kick" then 
 tact = "الجهات : ❌ : بالطرد"
 else
 tact =  "الجهات :☑️"   
 end    
-if redis:get(bot_id.."Lock:Inlen"..Chat_id) == "del" then
+if database:get(bot_id.."Lock:Inlen"..Chat_id) == "del" then
 len = "الانلاين : ❌ : بالمسح"
-elseif redis:get(bot_id.."Lock:Inlen"..Chat_id) == "ked" then 
+elseif database:get(bot_id.."Lock:Inlen"..Chat_id) == "ked" then 
 len = "الانلاين : ❌ : بالتقييد"
-elseif redis:get(bot_id.."Lock:Inlen"..Chat_id) == "ktm" then 
+elseif database:get(bot_id.."Lock:Inlen"..Chat_id) == "ktm" then 
 len = "الانلاين : ❌ : بالكتم"
-elseif redis:get(bot_id.."Lock:Inlen"..Chat_id) == "kick" then 
+elseif database:get(bot_id.."Lock:Inlen"..Chat_id) == "kick" then 
 len = "الانلاين : ❌ : بالطرد"
 else
 len =  "الانلاين :☑️"   
 end   
-if redis:get(bot_id.."Lock:Xn"..Chat_id) == "del" then
+if database:get(bot_id.."Lock:Xn"..Chat_id) == "del" then
 Xn = "الاباحي : ❌ : بالمسح"
 else
 Xn =  "الاباحي :☑️"   
@@ -9440,99 +9440,99 @@ if Addictive(data) then
 sender_match  = DAata:match("(%d+)")  
 get_r = DAata:gsub(sender_match,''):gsub("TR:",'')
 get_redis = DAata:gsub(sender_match,'')
-if DAata and get_redis:match("^Lock:(.*)$") then   
+if DAata and get_database:match("^Lock:(.*)$") then   
 if tonumber(data.sender_user_id_) == tonumber(sender_match) then
-if not redis:get(bot_id..""..get_redis..""..Chat_id) then ---not
-redis:set(bot_id..""..get_redis..""..Chat_id,"del") 
-elseif redis:get(bot_id..""..get_redis..""..Chat_id)== "del" then
-redis:set(bot_id..""..get_redis..""..Chat_id,"ktm") 
-elseif redis:get(bot_id..""..get_redis..""..Chat_id)== "ktm" then
-redis:set(bot_id..""..get_redis..""..Chat_id,"kick") 
-elseif redis:get(bot_id..""..get_redis..""..Chat_id)== "kick" then
-redis:set(bot_id..""..get_redis..""..Chat_id,"ked") 
-elseif redis:get(bot_id..""..get_redis..""..Chat_id)== "ked" then
-redis:del(bot_id..""..get_redis..""..Chat_id)  
+if not database:get(bot_id..""..get_redis..""..Chat_id) then ---not
+database:set(bot_id..""..get_redis..""..Chat_id,"del") 
+elseif database:get(bot_id..""..get_redis..""..Chat_id)== "del" then
+database:set(bot_id..""..get_redis..""..Chat_id,"ktm") 
+elseif database:get(bot_id..""..get_redis..""..Chat_id)== "ktm" then
+database:set(bot_id..""..get_redis..""..Chat_id,"kick") 
+elseif database:get(bot_id..""..get_redis..""..Chat_id)== "kick" then
+database:set(bot_id..""..get_redis..""..Chat_id,"ked") 
+elseif database:get(bot_id..""..get_redis..""..Chat_id)== "ked" then
+database:del(bot_id..""..get_redis..""..Chat_id)  
 end ---notget
 if get_redis == "flooding:settings" then
-if not redis:hget(bot_id.."flooding:settings:"..Chat_id,"flood") then    
-redis:hset(bot_id.."flooding:settings:"..Chat_id ,"flood","del")  
-elseif redis:hget(bot_id.."flooding:settings:"..Chat_id,"flood") == "del" then     
-redis:hset(bot_id.."flooding:settings:"..Chat_id ,"flood","ktm") 
-elseif redis:hget(bot_id.."flooding:settings:"..Chat_id,"flood") == "ktm" then     
-redis:hset(bot_id.."flooding:settings:"..Chat_id ,"flood","ked") 
-elseif redis:hget(bot_id.."flooding:settings:"..Chat_id,"flood") == "ked" then     
-redis:hset(bot_id.."flooding:settings:"..Chat_id ,"flood","ked") 
-elseif redis:hget(bot_id.."flooding:settings:"..Chat_id,"kick") == "kick" then     
-redis:hdel(bot_id.."flooding:settings:"..msg.chat_id_ ,"flood")  
+if not database:hget(bot_id.."flooding:settings:"..Chat_id,"flood") then    
+database:hset(bot_id.."flooding:settings:"..Chat_id ,"flood","del")  
+elseif database:hget(bot_id.."flooding:settings:"..Chat_id,"flood") == "del" then     
+database:hset(bot_id.."flooding:settings:"..Chat_id ,"flood","ktm") 
+elseif database:hget(bot_id.."flooding:settings:"..Chat_id,"flood") == "ktm" then     
+database:hset(bot_id.."flooding:settings:"..Chat_id ,"flood","ked") 
+elseif database:hget(bot_id.."flooding:settings:"..Chat_id,"flood") == "ked" then     
+database:hset(bot_id.."flooding:settings:"..Chat_id ,"flood","ked") 
+elseif database:hget(bot_id.."flooding:settings:"..Chat_id,"kick") == "kick" then     
+database:hdel(bot_id.."flooding:settings:"..msg.chat_id_ ,"flood")  
 end ---notget
 end ---get_redis
-if DAata and get_redis:match("^TR:(.*)$") then   
-if not redis:get(bot_id..""..get_r..""..Chat_id) then ---not
-redis:set(bot_id..""..get_r..""..Chat_id,true) 
-elseif redis:get(bot_id..""..get_r..""..Chat_id)== true then
-redis:del(bot_id..""..get_r..""..Chat_id) 
+if DAata and get_database:match("^TR:(.*)$") then   
+if not database:get(bot_id..""..get_r..""..Chat_id) then ---not
+database:set(bot_id..""..get_r..""..Chat_id,true) 
+elseif database:get(bot_id..""..get_r..""..Chat_id)== true then
+database:del(bot_id..""..get_r..""..Chat_id) 
 end ---TR
 end ---get_r
-if redis:get(bot_id.."Lock:text"..Chat_id) == true then
+if database:get(bot_id.."Lock:text"..Chat_id) == true then
 te = "الدردشه : ❌ : بالمسح"
 else
 te =  "الدردشه :☑️"   
 end        
-if redis:get(bot_id.."Lock:AddMempar"..Chat_id) == "kick" then
+if database:get(bot_id.."Lock:AddMempar"..Chat_id) == "kick" then
 AddM = "الاضافه : ❌ : بالطرد"
 else
 AddM =  "الاضافه :☑️"   
 end        
-if redis:get(bot_id.."Lock:Join"..Chat_id) == "kick" then
+if database:get(bot_id.."Lock:Join"..Chat_id) == "kick" then
 Jo = "الدخول : ❌ : بالطرد"
 else
 Jo =  "الدخول :☑️"   
 end        
-if redis:get(bot_id.."Lock:Bot:kick"..Chat_id) == "del" then
+if database:get(bot_id.."Lock:Bot:kick"..Chat_id) == "del" then
 Botki = "البوتات : ❌ : بالمسح"
-elseif redis:get(bot_id.."Lock:Bot:kick:"..Chat_id) == "kick" then
+elseif database:get(bot_id.."Lock:Bot:kick:"..Chat_id) == "kick" then
 Botki = "البوتات : ❌ : بالطرد"
 else
 Botki =  "البوتات :☑️"   
 end        
-if redis:get(bot_id.."Lock:tagservr"..Chat_id) == "del" then
+if database:get(bot_id.."Lock:tagservr"..Chat_id) == "del" then
 tag = "الاشعارات : ❌ : بالمسح"
 else
 tag =  "الاشعارات :☑️"   
 end        
-if redis:get(bot_id.."lockpin"..Chat_id) == true then
+if database:get(bot_id.."lockpin"..Chat_id) == true then
 pin = "التثبيت : ❌ : بالمسح"
 else
 pin =  "التثبيت :☑️"   
 end        
-if redis:get(bot_id.."Lock:edit"..Chat_id) == true then
+if database:get(bot_id.."Lock:edit"..Chat_id) == true then
 edit = "التعديل : ❌ : بالمسح"
 else
 edit =  "التعديل :☑️"   
 end        
-if redis:get(bot_id.."Lock:edit"..Chat_id) == true then
+if database:get(bot_id.."Lock:edit"..Chat_id) == true then
 edi = "تعديل الميديا : ❌ : بالمسح"
 else
 edi =  "تعديل الميديا :☑️"   
 end        
-if redis:get(bot_id.."Lock:Link"..Chat_id) == "del" then
+if database:get(bot_id.."Lock:Link"..Chat_id) == "del" then
 Link = "الروابط : ❌ : بالمسح"
-elseif redis:get(bot_id.."Lock:Link:"..Chat_id) == "kick" then
+elseif database:get(bot_id.."Lock:Link:"..Chat_id) == "kick" then
 Link = "الروابط : ❌ : بالطرد"
-elseif redis:get(bot_id.."Lock:Link:"..Chat_id) == "ktm" then
+elseif database:get(bot_id.."Lock:Link:"..Chat_id) == "ktm" then
 Link = "الروابط : ❌ : بالكتم"
-elseif redis:get(bot_id.."Lock:Link:"..Chat_id) == "ked" then
+elseif database:get(bot_id.."Lock:Link:"..Chat_id) == "ked" then
 Link = "الروابط : ❌ : بالتقييد"
 else
 Link =  "الروابط :☑️"   
 end        
-if redis:get(bot_id.."Lock:User:Name"..Chat_id) == "del" then
+if database:get(bot_id.."Lock:User:Name"..Chat_id) == "del" then
 usNa = "المعرفات : ❌ : بالمسح"
-elseif redis:get(bot_id.."Lock:User:Name:"..Chat_id) == "kick" then
+elseif database:get(bot_id.."Lock:User:Name:"..Chat_id) == "kick" then
 usNa = "المعرفات : ❌ : بالطرد"
-elseif redis:get(bot_id.."Lock:User:Name:"..Chat_id) == "ktm" then
+elseif database:get(bot_id.."Lock:User:Name:"..Chat_id) == "ktm" then
 usNa = "المعرفات : ❌ : بالكتم"
-elseif redis:get(bot_id.."Lock:User:Name:"..Chat_id) == "ked" then
+elseif database:get(bot_id.."Lock:User:Name:"..Chat_id) == "ked" then
 usNa = "المعرفات : ❌ : بالتقييد"
 else
 usNa =  "المعرفات :☑️"   
