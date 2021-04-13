@@ -9902,60 +9902,60 @@ if text and text:match('^'..Name_Bot..' ') then
 data.message_.content_.text_ = data.message_.content_.text_:gsub('^'..Name_Bot..' ','')
 end
 if text == "نسبه الحب" or text == "نسبه حب" and msg.reply_to_message_id_ ~= 0 and Addictive(msg) then
-if not redis:get(bot_id..'Cick:lov'..msg.chat_id_) then
-redis:set(bot_id..":"..msg.sender_user_id_..":lov_Bots"..msg.chat_id_,"sendlove")
+if not database:get(bot_id..'Cick:lov'..msg.chat_id_) then
+database:set(bot_id..":"..msg.sender_user_id_..":lov_Bots"..msg.chat_id_,"sendlove")
 Text = 'ارسل اسمك واسم الشخص الثاني،  \n مثال اسد و لبوى'
 send(msg.chat_id_, msg.id_,Text) 
 end
 end
-if text and text ~="نسبه الحب" and redis:get(bot_id..":"..msg.sender_user_id_..":lov_Bots"..msg.chat_id_) == "sendlove" then
+if text and text ~="نسبه الحب" and database:get(bot_id..":"..msg.sender_user_id_..":lov_Bots"..msg.chat_id_) == "sendlove" then
 num = {"10","20","30","35","75","34","66","82","23","19","55","8","63","32","27","89","99","98","3","80","49","100","6","0",};
 sendnum = num[math.random(#num)]
 sl = 'نسبه حب '..text..' هي : '..sendnum..'%'
 send(msg.chat_id_, msg.id_,sl) 
-redis:del(bot_id..":"..msg.sender_user_id_..":lov_Bots"..msg.chat_id_)
+database:del(bot_id..":"..msg.sender_user_id_..":lov_Bots"..msg.chat_id_)
 end
 if text == "نسبه الكره" or text == "نسبه كره" and msg.reply_to_message_id_ ~= 0 and Addictive(msg) then
-if not redis:get(bot_id..'Cick:krh'..msg.chat_id_) then
-redis:set(bot_id..":"..msg.sender_user_id_..":krh_Bots"..msg.chat_id_,"sendkrhe")
+if not database:get(bot_id..'Cick:krh'..msg.chat_id_) then
+database:set(bot_id..":"..msg.sender_user_id_..":krh_Bots"..msg.chat_id_,"sendkrhe")
 Text = 'ارسل اسمك واسم الشخص الثاني،  \n مثال اسد و لبوى'
 send(msg.chat_id_, msg.id_,Text) 
 end
 end
-if text and text ~="نسبه الكره" and redis:get(bot_id..":"..msg.sender_user_id_..":krh_Bots"..msg.chat_id_) == "sendkrhe" then
+if text and text ~="نسبه الكره" and database:get(bot_id..":"..msg.sender_user_id_..":krh_Bots"..msg.chat_id_) == "sendkrhe" then
 num = {"10","20","30","35","75","34","66","82","23","19","55","8","63","32","27","89","99","98","3","80","8","100","6","0",};
 sendnum = num[math.random(#num)]
 sl = 'نسبه كره '..text..' هي : '..sendnum..'%'
 send(msg.chat_id_, msg.id_,sl) 
-redis:del(bot_id..":"..msg.sender_user_id_..":krh_Bots"..msg.chat_id_)
+database:del(bot_id..":"..msg.sender_user_id_..":krh_Bots"..msg.chat_id_)
 end
 if text == "نسبه رجوله" or text == "نسبه الرجوله" and msg.reply_to_message_id_ ~= 0 and Addictive(msg) then
-if not redis:get(bot_id..'Cick:rjo'..msg.chat_id_) then
-redis:set(bot_id..":"..msg.sender_user_id_..":rjo_Bots"..msg.chat_id_,"sendrjoe")
+if not database:get(bot_id..'Cick:rjo'..msg.chat_id_) then
+database:set(bot_id..":"..msg.sender_user_id_..":rjo_Bots"..msg.chat_id_,"sendrjoe")
 Text = 'ارسل اسم الشخص الذي تريد قياس نسبه رجولته \n مثال امير'
 send(msg.chat_id_, msg.id_,Text) 
 end
 end
-if text and text ~="نسبه رجوله" and redis:get(bot_id..":"..msg.sender_user_id_..":rjo_Bots"..msg.chat_id_) == "sendrjoe" then
+if text and text ~="نسبه رجوله" and database:get(bot_id..":"..msg.sender_user_id_..":rjo_Bots"..msg.chat_id_) == "sendrjoe" then
 numj = {"10","20","30","35","75","34","66","82","23","19","55","80","63","32","27","89","99","98","79","100","8","3","6","0",};
 sendnuj = numj[math.random(#numj)]
 xl = 'نسبه رجوله '..text..' هي : \n '..sendnuj..'%'
 send(msg.chat_id_, msg.id_,xl) 
-redis:del(bot_id..":"..msg.sender_user_id_..":rjo_Bots"..msg.chat_id_)
+database:del(bot_id..":"..msg.sender_user_id_..":rjo_Bots"..msg.chat_id_)
 end
 if text == "نسبه الانوثه" or text == "نسبه انوثه" and msg.reply_to_message_id_ ~= 0 and Addictive(msg) then
-if not redis:get(bot_id..'Cick:ano'..msg.chat_id_) then
-redis:set(bot_id..":"..msg.sender_user_id_..":ano_Bots"..msg.chat_id_,"sendanoe")
+if not database:get(bot_id..'Cick:ano'..msg.chat_id_) then
+database:set(bot_id..":"..msg.sender_user_id_..":ano_Bots"..msg.chat_id_,"sendanoe")
 Text = 'ارسل اسم الشخص الذي تريد قياس نسبه انوثتها \n مثال نونه'
 send(msg.chat_id_, msg.id_,Text) 
 end
 end
-if text and text ~="نسبه الانوثه" and redis:get(bot_id..":"..msg.sender_user_id_..":ano_Bots"..msg.chat_id_) == "sendanoe" then
+if text and text ~="نسبه الانوثه" and database:get(bot_id..":"..msg.sender_user_id_..":ano_Bots"..msg.chat_id_) == "sendanoe" then
 numj = {"10","20","30","35","75","34","66","82","23","19","55","80","63","32","27","89","99","98","79","100","8","3","6","0",};
 sendnuj = numj[math.random(#numj)]
 xl = 'نسبه الانوثه '..text..' هي : \n '..sendnuj..'%'
 send(msg.chat_id_, msg.id_,xl) 
-redis:del(bot_id..":"..msg.sender_user_id_..":ano_Bots"..msg.chat_id_)
+database:del(bot_id..":"..msg.sender_user_id_..":ano_Bots"..msg.chat_id_)
 end
 ------------------------------------------------------------------------
 BoykA_Started_Bot(msg,data)
