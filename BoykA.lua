@@ -7034,6 +7034,7 @@ Time = redis:get(bot_id.."AutoFile:Time")
 if Time then 
 if Time ~= os.date("%x") then  
 local list = redis:smembers(bot_id..'Chek:Groups')  
+local memo = redis:smembers(bot_id..'UsersBot')  
 local t = '{"BOT_ID": '..bot_id..',"GP_BOT":{'  
 for k,v in pairs(list) do   
 NAME = 'chat'
