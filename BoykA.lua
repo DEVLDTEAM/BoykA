@@ -50,7 +50,7 @@ end
 return Taha_Sudo  
 end 
 
-function VIP_DeV(msg)  
+function DevBotsIs(msg)  
 local h_Sudo = false  
 for k,v in pairs(List_Sudos) do  
 if msg.sender_user_id_ == v then  
@@ -61,7 +61,7 @@ return h_Sudo
 end 
 function DevBoykA(msg) 
 local hash = database:sismember(bot_id.."DEV:Sudo:T", msg.sender_user_id_) 
-if hash or VIP_DeV(msg) then  
+if hash or DevBotsIs(msg) then  
 return true  
 else  
 return false  
@@ -76,7 +76,7 @@ return idbot
 end
 function DevBot(msg) 
 local hash = database:sismember(bot_id.."Sudo:User", msg.sender_user_id_) 
-if hash or Bot(msg) or DevBoykA(msg) or VIP_DeV(msg) then    
+if hash or Bot(msg) or DevBoykA(msg) or DevBotsIs(msg) then    
 return true  
 else  
 return false  
@@ -84,7 +84,7 @@ end
 end
 function BasicConstructor(msg)
 local hash = database:sismember(bot_id.."Basic:Constructor"..msg.chat_id_, msg.sender_user_id_) 
-if hash or Bot(msg) or DevBoykA(msg) or DevBot(msg) or VIP_DeV(msg) then     
+if hash or Bot(msg) or DevBoykA(msg) or DevBot(msg) or DevBotsIs(msg) then     
 return true 
 else 
 return false 
@@ -92,7 +92,7 @@ end
 end
 function Constructor(msg)
 local hash = database:sismember(bot_id.."Constructor"..msg.chat_id_, msg.sender_user_id_) 
-if hash or Bot(msg) or DevBoykA(msg) or DevBot(msg) or BasicConstructor(msg) or VIP_DeV(msg) then        
+if hash or Bot(msg) or DevBoykA(msg) or DevBot(msg) or BasicConstructor(msg) or DevBotsIs(msg) then        
 return true    
 else    
 return false    
@@ -100,7 +100,7 @@ end
 end
 function Owner(msg)
 local hash = database:sismember(bot_id.."Manager"..msg.chat_id_,msg.sender_user_id_)    
-if hash or Bot(msg) or DevBoykA(msg) or DevBot(msg) or BasicConstructor(msg) or Constructor(msg) or VIP_DeV(msg) then        
+if hash or Bot(msg) or DevBoykA(msg) or DevBot(msg) or BasicConstructor(msg) or Constructor(msg) or DevBotsIs(msg) then        
 return true    
 else    
 return false    
@@ -108,7 +108,7 @@ end
 end
 function Addictive(msg)
 local hash = database:sismember(bot_id.."Mod:User"..msg.chat_id_,msg.sender_user_id_)    
-if hash or Bot(msg) or DevBoykA(msg) or DevBot(msg) or BasicConstructor(msg) or Constructor(msg) or Owner(msg) or VIP_DeV(msg) then        
+if hash or Bot(msg) or DevBoykA(msg) or DevBot(msg) or BasicConstructor(msg) or Constructor(msg) or Owner(msg) or DevBotsIs(msg) then        
 return true    
 else    
 return false    
@@ -116,7 +116,7 @@ end
 end
 function Vips(msg)
 local hash = database:sismember(bot_id.."Special:User"..msg.chat_id_,msg.sender_user_id_) 
-if hash or Bot(msg) or  DevBoykA(msg) or DevBot(msg) or BasicConstructor(msg) or Constructor(msg) or Owner(msg) or Addictive(msg) or VIP_DeV(msg) then        
+if hash or Bot(msg) or  DevBoykA(msg) or DevBot(msg) or BasicConstructor(msg) or Constructor(msg) or Owner(msg) or Addictive(msg) or DevBotsIs(msg) then        
 return true 
 else 
 return false 
@@ -127,7 +127,7 @@ if DevBoykAe(user_id) == true then
 var = true
 elseif DevBoykA(user_id) == true then
 var = true
-elseif VIP_DeV(user_id) == true then
+elseif DevBotsIs(user_id) == true then
 var = true
 elseif Bot(user_id) == true then
 var = true
@@ -2389,7 +2389,7 @@ database:hdel(bot_id.."flooding:settings:"..msg.chat_id_ ,"flood")
 Reply_Status(msg,msg.sender_user_id_,"unlock","✫️ : تم فتح التكرار")
 return false
 end 
-if text == ("اضف مطور ثانوي") and tonumber(msg.reply_to_message_id_) ~= 0 and VIP_DeV(msg) then
+if text == ("اضف مطور ثانوي") and tonumber(msg.reply_to_message_id_) ~= 0 and DevBotsIs(msg) then
 function Function_BoykA(extra, result, success)
 database:sadd(bot_id.."DEV:Sudo:T", result.sender_user_id_)
 Reply_Status(msg,result.sender_user_id_,"reply","✫: تم ترقيته مطور ثانوي في البوت")  
@@ -2397,7 +2397,7 @@ end
 tdcli_function ({ID = "GetMessage",chat_id_ = msg.chat_id_,message_id_ = tonumber(msg.reply_to_message_id_)}, Function_BoykA, nil)
 return false 
 end
-if text and text:match("^اضف مطور ثانوي @(.*)$") and VIP_DeV(msg) then
+if text and text:match("^اضف مطور ثانوي @(.*)$") and DevBotsIs(msg) then
 local username = text:match("^اضف مطور ثانوي @(.*)$")
 function Function_BoykA(extra, result, success)
 if result.id_ then
@@ -2414,13 +2414,13 @@ end
 tdcli_function ({ID = "SearchPublicChat",username_ = username}, Function_BoykA, nil)
 return false 
 end
-if text and text:match("^اضف مطور ثانوي (%d+)$") and VIP_DeV(msg) then
+if text and text:match("^اضف مطور ثانوي (%d+)$") and DevBotsIs(msg) then
 local userid = text:match("^اضف مطور ثانوي (%d+)$")
 database:sadd(bot_id.."DEV:Sudo:T", userid)
 Reply_Status(msg,userid,"reply","✫: تم ترقيته مطور ثانوي في البوت")  
 return false 
 end
-if text == ("حذف مطور ثانوي") and tonumber(msg.reply_to_message_id_) ~= 0 and VIP_DeV(msg) then
+if text == ("حذف مطور ثانوي") and tonumber(msg.reply_to_message_id_) ~= 0 and DevBotsIs(msg) then
 function Function_BoykA(extra, result, success)
 database:srem(bot_id.."DEV:Sudo:T", result.sender_user_id_)
 Reply_Status(msg,result.sender_user_id_,"reply","✫: تم تنزيله من المطور ثانويين")  
@@ -2428,7 +2428,7 @@ end
 tdcli_function ({ID = "GetMessage",chat_id_ = msg.chat_id_,message_id_ = tonumber(msg.reply_to_message_id_)}, Function_BoykA, nil)
 return false 
 end
-if text and text:match("^حذف مطور ثانوي @(.*)$") and VIP_DeV(msg) then
+if text and text:match("^حذف مطور ثانوي @(.*)$") and DevBotsIs(msg) then
 local username = text:match("^حذف مطور ثانوي @(.*)$")
 function Function_BoykA(extra, result, success)
 if result.id_ then
@@ -2441,7 +2441,7 @@ end
 tdcli_function ({ID = "SearchPublicChat",username_ = username}, Function_BoykA, nil)
 return false
 end  
-if text and text:match("^حذف مطور ثانوي (%d+)$") and VIP_DeV(msg) then
+if text and text:match("^حذف مطور ثانوي (%d+)$") and DevBotsIs(msg) then
 local userid = text:match("^حذف مطور ثانوي (%d+)$")
 database:srem(bot_id.."DEV:Sudo:T", userid)
 Reply_Status(msg,userid,"reply","✫: تم تنزيله من المطور ثانويين")  
@@ -2463,7 +2463,7 @@ t = "✫: لا يوجد مطورين ثانويين"
 end
 send(msg.chat_id_, msg.id_, t)
 end
-if text == ("مسح الثانويين") and VIP_DeV(msg) then
+if text == ("مسح الثانويين") and DevBotsIs(msg) then
 database:del(bot_id.."DEV:Sudo:T")
 send(msg.chat_id_, msg.id_, "\n✫:  تم مسح قائمة المطورين الثانويين  ")
 end
@@ -5856,8 +5856,6 @@ if text == "تعطيل ردود المطور" and Owner(msg) then
 database:set(bot_id.."Reply:Sudo"..msg.chat_id_,true)   
 send(msg.chat_id_, msg.id_,"✫: تم تعطيل ردود المطور" ) 
 end
-
-
 if text == ("تنزيل الكل") and msg.reply_to_message_id_ ~= 0 and Owner(msg) then
 if AddChannel(msg.sender_user_id_) == false then
 local textchuser = database:get(bot_id..'text:ch:user')
@@ -5873,48 +5871,26 @@ if tonumber(Id_Sudo) == tonumber(result.sender_user_id_) then
 send(msg.chat_id_, msg.id_,"✫:  لا تستطيع تنزيل المطور الاساسي")
 return false 
 end
-if database:sismember(bot_id.."Sudo:User",result.sender_user_id_) then
-dev = "✫: تم تنزيله من المطورين"
-else 
-dev = "✫: هو ليس مطور" 
-end
-if database:sismember(bot_id.."Basic:Constructor"..msg.chat_id_, result.sender_user_id_) then
-crr = "✫: تم تنزيل من الاساسيين" 
-else 
-crr = "✫: هو ليس منشئ اساسي" 
-end
-if database:sismember(bot_id.."Constructor"..msg.chat_id_, result.sender_user_id_) then
-cr = "✫: تم تنزيله من المنشئين" 
-else 
-cr = "✫: هو ليس منشئ" 
-end
-if database:sismember(bot_id.."Manager"..msg.chat_id_, result.sender_user_id_) then
-own = "✫: تم تنزيله من المدراء" 
-else 
-own = "✫: هو ليس مدير" 
-end
-if database:sismember(bot_id.."Mod:User"..msg.chat_id_, result.sender_user_id_) then
-mod = "✫: تم تنزيله من الادميه"
- else 
-mod = "✫: هو ليس ادمن" 
-end
-if database:sismember(bot_id.."Special:User"..msg.chat_id_, result.sender_user_id_) then
-vip = "✫: تم تنزيل من المميزين"
-else
-vip = "✫: هو ليس مميز"
-end
 if Rank_Checking(result.sender_user_id_,msg.chat_id_) ~= false then
 send(msg.chat_id_, msg.id_,"\n✫: تم تنزيل الشخص من جميع الرتب")
 else
 send(msg.chat_id_, msg.id_,"\n✫: ليس لديه رتب حتى استطيع تنزيله \n")
 end
-if tonumber(Id_Sudo) == tonumber(msg.sender_user_id_) then
+if DevBotsIs(msg) == true then
+database:srem(bot_id.."DEV:Sudo:T",result.sender_user_id_)
 database:srem(bot_id.."Sudo:User", result.sender_user_id_)
 database:srem(bot_id.."Basic:Constructor"..msg.chat_id_,result.sender_user_id_)
 database:srem(bot_id.."Constructor"..msg.chat_id_, result.sender_user_id_)
 database:srem(bot_id.."Manager"..msg.chat_id_, result.sender_user_id_)
 database:srem(bot_id.."Mod:User"..msg.chat_id_, result.sender_user_id_)
 database:srem(bot_id.."Special:User"..msg.chat_id_, result.sender_user_id_)
+elseif database:sismember(bot_id.."DEV:Sudo:T",msg.sender_user_id_) then
+database:srem(bot_id.."Mod:User"..msg.chat_id_, result.sender_user_id_)
+database:srem(bot_id.."Special:User"..msg.chat_id_, result.sender_user_id_)
+database:srem(bot_id.."Manager"..msg.chat_id_, result.sender_user_id_)
+database:srem(bot_id.."Constructor"..msg.chat_id_, result.sender_user_id_)
+database:srem(bot_id.."Basic:Constructor"..msg.chat_id_,result.sender_user_id_)
+database:srem(bot_id.."Sudo:User",result.sender_user_id_)
 elseif database:sismember(bot_id.."Sudo:User",msg.sender_user_id_) then
 database:srem(bot_id.."Mod:User"..msg.chat_id_, result.sender_user_id_)
 database:srem(bot_id.."Special:User"..msg.chat_id_, result.sender_user_id_)
@@ -5936,6 +5912,56 @@ database:srem(bot_id.."Special:User"..msg.chat_id_, result.sender_user_id_)
 end
 end
 tdcli_function ({ID = "GetMessage",chat_id_ = msg.chat_id_,message_id_ = tonumber(msg.reply_to_message_id_)}, Function_BoykA, nil)
+end
+if text and text:match("^تنزيل الكل @(.*)$") and Owner(msg) then
+function FunctionStatus(extra, result, success)
+if (result.id_) then
+if tonumber(Id_Sudo) == tonumber(result.id_) then
+send(msg.chat_id_, msg.id_,"✫:  لا تستطيع تنزيل المطور الاساسي")
+return false 
+end
+if Rank_Checking(result.id_,msg.chat_id_) ~= false then
+send(msg.chat_id_, msg.id_,"\n✫: تم تنزيل الشخص من جميع الرتب")
+else
+send(msg.chat_id_, msg.id_,"\n✫: ليس لديه رتب حتى استطيع تنزيله \n")
+end
+if DevBotsIs(msg) == true then
+database:srem(bot_id.."DEV:Sudo:T",result.id_)
+database:srem(bot_id.."Sudo:User", result.id_)
+database:srem(bot_id.."Basic:Constructor"..msg.chat_id_,result.id_)
+database:srem(bot_id.."Constructor"..msg.chat_id_, result.id_)
+database:srem(bot_id.."Manager"..msg.chat_id_, result.id_)
+database:srem(bot_id.."Mod:User"..msg.chat_id_, result.id_)
+database:srem(bot_id.."Special:User"..msg.chat_id_, result.id_)
+elseif database:sismember(bot_id.."DEV:Sudo:T",msg.sender_user_id_) then
+database:srem(bot_id.."Mod:User"..msg.chat_id_, result.id_)
+database:srem(bot_id.."Special:User"..msg.chat_id_, result.id_)
+database:srem(bot_id.."Manager"..msg.chat_id_, result.id_)
+database:srem(bot_id.."Constructor"..msg.chat_id_, result.id_)
+database:srem(bot_id.."Basic:Constructor"..msg.chat_id_,result.id_)
+database:srem(bot_id.."Sudo:User",result.id_)
+elseif database:sismember(bot_id.."Sudo:User",msg.sender_user_id_) then
+database:srem(bot_id.."Mod:User"..msg.chat_id_, result.id_)
+database:srem(bot_id.."Special:User"..msg.chat_id_, result.id_)
+database:srem(bot_id.."Manager"..msg.chat_id_, result.id_)
+database:srem(bot_id.."Constructor"..msg.chat_id_, result.id_)
+database:srem(bot_id.."Basic:Constructor"..msg.chat_id_,result.id_)
+elseif database:sismember(bot_id.."Basic:Constructor"..msg.chat_id_, msg.sender_user_id_) then
+database:srem(bot_id.."Mod:User"..msg.chat_id_, result.id_)
+database:srem(bot_id.."Special:User"..msg.chat_id_, result.id_)
+database:srem(bot_id.."Manager"..msg.chat_id_, result.id_)
+database:srem(bot_id.."Constructor"..msg.chat_id_, result.id_)
+elseif database:sismember(bot_id.."Constructor"..msg.chat_id_, msg.sender_user_id_) then
+database:srem(bot_id.."Mod:User"..msg.chat_id_, result.id_)
+database:srem(bot_id.."Special:User"..msg.chat_id_, result.id_)
+database:srem(bot_id.."Manager"..msg.chat_id_, result.id_)
+elseif database:sismember(bot_id.."Manager"..msg.chat_id_, msg.sender_user_id_) then
+database:srem(bot_id.."Mod:User"..msg.chat_id_, result.id_)
+database:srem(bot_id.."Special:User"..msg.chat_id_, result.id_)
+end
+end
+end
+tdcli_function ({ID = "SearchPublicChat",username_ = text:match("^تنزيل الكل @(.*)$")}, FunctionStatus, nil)
 end
 if text == "تاك للكل" and Addictive(msg) then
 if AddChannel(msg.sender_user_id_) == false then
@@ -6815,6 +6841,15 @@ send(msg.chat_id_, msg.id_,'✫: تم تعين الايدي')
 end
 
 if text == 'ايدي' and tonumber(msg.reply_to_message_id_) == 0 and not database:get(bot_id..'Lock:ID:Bot'..msg.chat_id_) then
+if AddChannel(msg.sender_user_id_) == false then
+local textchuser = database:get(bot_id..'text:ch:user')
+if textchuser then
+send(msg.chat_id_, msg.id_,'['..textchuser..']')
+else
+send(msg.chat_id_, msg.id_,'✫: عـليك الاشـتࢪاك في قنـاة البـوت اولآ . \n ✫: قنـاة البـوت ←  ['..database:get(bot_id..'add:ch:username')..']')
+end
+return false
+end
 if not database:sismember(bot_id..'Spam:Group'..msg.sender_user_id_,text) then
 database:sadd(bot_id.."Spam:Group"..msg.sender_user_id_,text) 
 tdcli_function ({ID = "GetUserProfilePhotos",user_id_ = msg.sender_user_id_,offset_ = 0,limit_ = 1},function(extra,taha,success) 
@@ -8691,14 +8726,14 @@ t = "✫: لا يوجد مطورين ثانويين"
 end
 send(msg.chat_id_, msg.id_, t)
 end
-if text =='✫: الثانويين .' and not VIP_DeV(msg) then
+if text =='✫: الثانويين .' and not DevBotsIs(msg) then
 send(msg.chat_id_, msg.id_,'✫: تسرسح .')
 end
-if text =='✫: مسح الثانويين .' and VIP_DeV(msg) then
+if text =='✫: مسح الثانويين .' and DevBotsIs(msg) then
 send(msg.chat_id_, msg.id_,'✫: تم بالفعل مسح قائمه المطورين الثانوي .')
 database:del(bot_id.."TSudo:User")
 end
-if text =='✫: مسح الثانويين .' and not VIP_DeV(msg) then
+if text =='✫: مسح الثانويين .' and not DevBotsIs(msg) then
 send(msg.chat_id_, msg.id_,'✫: تسرسح .')
 end
 if text and database:get(bot_id..'na:Bots') then
@@ -8800,11 +8835,11 @@ end,nil)
 end
 return false
 end
-if text =='تغيير المطور الاساسي ✫' and VIP_DeV(msg) then
+if text =='تغيير المطور الاساسي ✫' and DevBotsIs(msg) then
 send(msg.chat_id_, msg.id_,'✫: ارسل ايدي المطور الاساسي الجديد')
 database:set(bot_id..'Ed:DevBots',true) 
 end
-if text =='تغيير المطور الاساسي ✫' and not VIP_DeV(msg) then
+if text =='تغيير المطور الاساسي ✫' and not DevBotsIs(msg) then
 send(msg.chat_id_, msg.id_,'✫: تسرسح')
 end
 if database:get(bot_id.."Ed:DevBots") then
