@@ -6061,7 +6061,7 @@ tdcli_function ({ID = "GetUser",user_id_ = result.sender_user_id_},function(extr
 local rtp = Get_Rank(result.sender_user_id_,msg.chat_id_)
 local username = ('[@'..data.username_..']' or 'لا يوجد')
 local iduser = result.sender_user_id_
-send(msg.chat_id_, msg.id_,'● الايدي > ('..iduser..')\n● المعرف > ('..username..')\n● الرتبه > ('..rtp..')\n')
+send(msg.chat_id_, msg.id_,'✫: الايدي > ('..iduser..')\n✫: المعرف > ('..username..')\n✫: الرتبه > ('..rtp..')\n')
 end,nil)
 end
 tdcli_function ({ID = "GetMessage",chat_id_ = msg.chat_id_,message_id_ = tonumber(msg.reply_to_message_id_)}, start_function, nil)
@@ -6075,10 +6075,10 @@ tdcli_function ({ID = "GetUser",user_id_ = result.id_},function(extra,data)
 local rtp = Get_Rank(result.id_,msg.chat_id_)
 local username = ('[@'..data.username_..']' or 'لا يوجد')
 local iduser = result.id_
-send(msg.chat_id_, msg.id_,'● الايدي > ('..iduser..')\n● المعرف > ('..username..')\n● الرتبه > ('..rtp..')\n')
+send(msg.chat_id_, msg.id_,'✫: الايدي > ('..iduser..')\n✫: المعرف > ('..username..')\n✫: الرتبه > ('..rtp..')\n')
 end,nil)
 else
-send(msg.chat_id_, msg.id_,'● المعرف غير صحيح ')
+send(msg.chat_id_, msg.id_,'✫: المعرف غير صحيح ')
 end
 end
 tdcli_function ({ID = "SearchPublicChat",username_ = username}, start_function, nil)
@@ -6538,335 +6538,84 @@ database:set(bot_id.."Status:Bc",true)
 send(msg.chat_id_, msg.id_,"\n✫: تم تعطيل الاذاعه") 
 return false
 end 
-
 if text == "الاعدادات" and Addictive(msg) then    
-if database:get(bot_id.."lockpin"..msg.chat_id_) then    
-lock_pin = "✓"
-else 
-lock_pin = "✘"    
-end
-if database:get(bot_id.."Lock:tagservr"..msg.chat_id_) then    
-lock_tagservr = "✓"
-else 
-lock_tagservr = "✘"    
-end
-if database:get(bot_id.."Lock:text"..msg.chat_id_) then    
-lock_text = "✓"
-else 
-lock_text = "✘"    
-end
-if database:get(bot_id.."Lock:AddMempar"..msg.chat_id_) == "kick" then
-lock_add = "✓"
-else 
-lock_add = "✘"    
-end    
-if database:get(bot_id.."Lock:Join"..msg.chat_id_) == "kick" then
-lock_join = "✓"
-else 
-lock_join = "✘"    
-end    
-if database:get(bot_id.."Lock:edit"..msg.chat_id_) then    
-lock_edit = "✓"
-else 
-lock_edit = "✘"    
-end
-if database:get(bot_id.."Get:Welcome:Group"..msg.chat_id_) then
-welcome = "✓"
-else 
-welcome = "✘"    
-end
-if database:hget(bot_id.."flooding:settings:"..msg.chat_id_, "flood") == "kick" then     
-flood = "بالطرد"     
-elseif database:hget(bot_id.."flooding:settings:"..msg.chat_id_,"flood") == "keed" then     
-flood = "بالتقيد"     
-elseif database:hget(bot_id.."flooding:settings:"..msg.chat_id_,"flood") == "mute" then     
-flood = "بالكتم"           
-elseif database:hget(bot_id.."flooding:settings:"..msg.chat_id_,"flood") == "del" then     
-flood = "بالمسح"           
-else     
-flood = "✘"     
-end
-if database:get(bot_id.."Lock:Photo"..msg.chat_id_) == "del" then
-lock_photo = "✓" 
-elseif database:get(bot_id.."Lock:Photo"..msg.chat_id_) == "ked" then 
-lock_photo = "بالتقيد"   
-elseif database:get(bot_id.."Lock:Photo"..msg.chat_id_) == "ktm" then 
-lock_photo = "بالكتم"    
-elseif database:get(bot_id.."Lock:Photo"..msg.chat_id_) == "kick" then 
-lock_photo = "بالطرد"   
+if redis:get(bot_id.."Lock:text"..msg.chat_id_) == true then
+te = "الدردشه : ❌ : بالمسح"
 else
-lock_photo = "✘"   
-end    
-if database:get(bot_id.."Lock:Contact"..msg.chat_id_) == "del" then
-lock_phon = "✓" 
-elseif database:get(bot_id.."Lock:Contact"..msg.chat_id_) == "ked" then 
-lock_phon = "بالتقيد"    
-elseif database:get(bot_id.."Lock:Contact"..msg.chat_id_) == "ktm" then 
-lock_phon = "بالكتم"    
-elseif database:get(bot_id.."Lock:Contact"..msg.chat_id_) == "kick" then 
-lock_phon = "بالطرد"    
-else
-lock_phon = "✘"    
-end    
-if database:get(bot_id.."Lock:Link"..msg.chat_id_) == "del" then
-lock_links = "✓"
-elseif database:get(bot_id.."Lock:Link"..msg.chat_id_) == "ked" then
-lock_links = "بالتقيد"    
-elseif database:get(bot_id.."Lock:Link"..msg.chat_id_) == "ktm" then
-lock_links = "بالكتم"    
-elseif database:get(bot_id.."Lock:Link"..msg.chat_id_) == "kick" then
-lock_links = "بالطرد"    
-else
-lock_links = "✘"    
-end
-if database:get(bot_id.."Lock:Cmd"..msg.chat_id_) == "del" then
-lock_cmds = "✓"
-elseif database:get(bot_id.."Lock:Cmd"..msg.chat_id_) == "ked" then
-lock_cmds = "بالتقيد"    
-elseif database:get(bot_id.."Lock:Cmd"..msg.chat_id_) == "ktm" then
-lock_cmds = "بالكتم"   
-elseif database:get(bot_id.."Lock:Cmd"..msg.chat_id_) == "kick" then
-lock_cmds = "بالطرد"    
-else
-lock_cmds = "✘"    
-end
-if database:get(bot_id.."Lock:User:Name"..msg.chat_id_) == "del" then
-lock_user = "✓"
-elseif database:get(bot_id.."Lock:User:Name"..msg.chat_id_) == "ked" then
-lock_user = "بالتقيد"    
-elseif database:get(bot_id.."Lock:User:Name"..msg.chat_id_) == "ktm" then
-lock_user = "بالكتم"    
-elseif database:get(bot_id.."Lock:User:Name"..msg.chat_id_) == "kick" then
-lock_user = "بالطرد"    
-else
-lock_user = "✘"    
-end
-if database:get(bot_id.."Lock:hashtak"..msg.chat_id_) == "del" then
-lock_hash = "✓"
-elseif database:get(bot_id.."Lock:hashtak"..msg.chat_id_) == "ked" then 
-lock_hash = "بالتقيد"    
-elseif database:get(bot_id.."Lock:hashtak"..msg.chat_id_) == "ktm" then 
-lock_hash = "بالكتم"    
-elseif database:get(bot_id.."Lock:hashtak"..msg.chat_id_) == "kick" then 
-lock_hash = "بالطرد"    
-else
-lock_hash = "✘"    
-end
-if database:get(bot_id.."Lock:vico"..msg.chat_id_) == "del" then
-lock_muse = "✓"
-elseif database:get(bot_id.."Lock:vico"..msg.chat_id_) == "ked" then 
-lock_muse = "بالتقيد"    
-elseif database:get(bot_id.."Lock:vico"..msg.chat_id_) == "ktm" then 
-lock_muse = "بالكتم"    
-elseif database:get(bot_id.."Lock:vico"..msg.chat_id_) == "kick" then 
-lock_muse = "بالطرد"    
-else
-lock_muse = "✘"    
-end 
-if database:get(bot_id.."Lock:Video"..msg.chat_id_) == "del" then
-lock_ved = "✓"
-elseif database:get(bot_id.."Lock:Video"..msg.chat_id_) == "ked" then 
-lock_ved = "بالتقيد"    
-elseif database:get(bot_id.."Lock:Video"..msg.chat_id_) == "ktm" then 
-lock_ved = "بالكتم"    
-elseif database:get(bot_id.."Lock:Video"..msg.chat_id_) == "kick" then 
-lock_ved = "بالطرد"    
-else
-lock_ved = "✘"    
-end
-if database:get(bot_id.."Lock:Animation"..msg.chat_id_) == "del" then
-lock_gif = "✓"
-elseif database:get(bot_id.."Lock:Animation"..msg.chat_id_) == "ked" then 
-lock_gif = "بالتقيد"    
-elseif database:get(bot_id.."Lock:Animation"..msg.chat_id_) == "ktm" then 
-lock_gif = "بالكتم"    
-elseif database:get(bot_id.."Lock:Animation"..msg.chat_id_) == "kick" then 
-lock_gif = "بالطرد"    
-else
-lock_gif = "✘"    
-end
-if database:get(bot_id.."Lock:Sticker"..msg.chat_id_) == "del" then
-lock_ste = "✓"
-elseif database:get(bot_id.."Lock:Sticker"..msg.chat_id_) == "ked" then 
-lock_ste = "بالتقيد "    
-elseif database:get(bot_id.."Lock:Sticker"..msg.chat_id_) == "ktm" then 
-lock_ste = "بالكتم "    
-elseif database:get(bot_id.."Lock:Sticker"..msg.chat_id_) == "kick" then 
-lock_ste = "بالطرد"    
-else
-lock_ste = "✘"    
-end
-if database:get(bot_id.."Lock:geam"..msg.chat_id_) == "del" then
-lock_geam = "✓"
-elseif database:get(bot_id.."Lock:geam"..msg.chat_id_) == "ked" then 
-lock_geam = "بالتقيد"    
-elseif database:get(bot_id.."Lock:geam"..msg.chat_id_) == "ktm" then 
-lock_geam = "بالكتم"    
-elseif database:get(bot_id.."Lock:geam"..msg.chat_id_) == "kick" then 
-lock_geam = "بالطرد"    
-else
-lock_geam = "✘"    
-end    
-if database:get(bot_id.."Lock:vico"..msg.chat_id_) == "del" then
-lock_vico = "✓"
-elseif database:get(bot_id.."Lock:vico"..msg.chat_id_) == "ked" then 
-lock_vico = "بالتقيد"    
-elseif database:get(bot_id.."Lock:vico"..msg.chat_id_) == "ktm" then 
-lock_vico = "بالكتم"    
-elseif database:get(bot_id.."Lock:vico"..msg.chat_id_) == "kick" then 
-lock_vico = "بالطرد"    
-else
-lock_vico = "✘"    
-end    
-if database:get(bot_id.."Lock:Keyboard"..msg.chat_id_) == "del" then
-lock_inlin = "✓"
-elseif database:get(bot_id.."Lock:Keyboard"..msg.chat_id_) == "ked" then 
-lock_inlin = "بالتقيد"
-elseif database:get(bot_id.."Lock:Keyboard"..msg.chat_id_) == "ktm" then 
-lock_inlin = "بالكتم"    
-elseif database:get(bot_id.."Lock:Keyboard"..msg.chat_id_) == "kick" then 
-lock_inlin = "بالطرد"
-else
-lock_inlin = "✘"
-end
-if database:get(bot_id.."Lock:forward"..msg.chat_id_) == "del" then
-lock_fwd = "✓"
-elseif database:get(bot_id.."Lock:forward"..msg.chat_id_) == "ked" then 
-lock_fwd = "بالتقيد"    
-elseif database:get(bot_id.."Lock:forward"..msg.chat_id_) == "ktm" then 
-lock_fwd = "بالكتم"    
-elseif database:get(bot_id.."Lock:forward"..msg.chat_id_) == "kick" then 
-lock_fwd = "بالطرد"    
-else
-lock_fwd = "✘"    
-end    
-if database:get(bot_id.."Lock:Document"..msg.chat_id_) == "del" then
-lock_file = "✓"
-elseif database:get(bot_id.."Lock:Document"..msg.chat_id_) == "ked" then 
-lock_file = "بالتقيد"    
-elseif database:get(bot_id.."Lock:Document"..msg.chat_id_) == "ktm" then 
-lock_file = "بالكتم"    
-elseif database:get(bot_id.."Lock:Document"..msg.chat_id_) == "kick" then 
-lock_file = "بالطرد"    
-else
-lock_file = "✘"    
-end    
-if database:get(bot_id.."Lock:Unsupported"..msg.chat_id_) == "del" then
-lock_self = "✓"
-elseif database:get(bot_id.."Lock:Unsupported"..msg.chat_id_) == "ked" then 
-lock_self = "بالتقيد"    
-elseif database:get(bot_id.."Lock:Unsupported"..msg.chat_id_) == "ktm" then 
-lock_self = "بالكتم"    
-elseif database:get(bot_id.."Lock:Unsupported"..msg.chat_id_) == "kick" then 
-lock_self = "بالطرد"    
-else
-lock_self = "✘"    
-end
-if database:get(bot_id.."Lock:Bot:kick"..msg.chat_id_) == "del" then
-lock_bots = "✓"
-elseif database:get(bot_id.."Lock:Bot:kick"..msg.chat_id_) == "ked" then
-lock_bots = "بالتقيد"   
-elseif database:get(bot_id.."Lock:Bot:kick"..msg.chat_id_) == "kick" then
-lock_bots = "بالطرد"    
-else
-lock_bots = "✘"    
-end
-if database:get(bot_id.."Lock:Markdaun"..msg.chat_id_) == "del" then
-lock_mark = "✓"
-elseif database:get(bot_id.."Lock:Markdaun"..msg.chat_id_) == "ked" then 
-lock_mark = "بالتقيد"    
-elseif database:get(bot_id.."Lock:Markdaun"..msg.chat_id_) == "ktm" then 
-lock_mark = "بالكتم"    
-elseif database:get(bot_id.."Lock:Markdaun"..msg.chat_id_) == "kick" then 
-lock_mark = "بالطرد"    
-else
-lock_mark = "✘"    
-end
-if database:get(bot_id.."Lock:Spam"..msg.chat_id_) == "del" then    
-lock_spam = "✓"
-elseif database:get(bot_id.."Lock:Spam"..msg.chat_id_) == "ked" then 
-lock_spam = "بالتقيد"    
-elseif database:get(bot_id.."Lock:Spam"..msg.chat_id_) == "ktm" then 
-lock_spam = "بالكتم"    
-elseif database:get(bot_id.."Lock:Spam"..msg.chat_id_) == "kick" then 
-lock_spam = "بالطرد"    
-else
-lock_spam = "✘"    
+te =  "الدردشه :☑️"   
 end        
-if not database:get(bot_id.."Reply:Manager"..msg.chat_id_) then
-rdmder = "✓"
+if redis:get(bot_id.."Lock:AddMempar"..msg.chat_id_) == "kick" then
+AddM = "الاضافه : ❌ : بالطرد"
 else
-rdmder = "✘"
-end
-if not database:get(bot_id.."Reply:Sudo"..msg.chat_id_) then
-rdsudo = "✓"
+AddM =  "الاضافه :☑️"   
+end        
+if redis:get(bot_id.."Lock:Join"..msg.chat_id_) == "kick" then
+Jo = "الدخول : ❌ : بالطرد"
 else
-rdsudo = "✘"
-end
-if not database:get(bot_id.."Lock:ID:Bot"..msg.chat_id_)  then
-idgp = "✓"
+Jo =  "الدخول :☑️"   
+end        
+if redis:get(bot_id.."Lock:Bot:kick"..msg.chat_id_) == "del" then
+Botki = "البوتات : ❌ : بالمسح"
+elseif redis:get(bot_id.."Lock:Bot:kick:"..msg.chat_id_) == "kick" then
+Botki = "البوتات : ❌ : بالطرد"
 else
-idgp = "✘"
-end
-if not database:get(bot_id.."Lock:ID:Bot:Photo"..msg.chat_id_) then
-idph = "✓"
+Botki =  "البوتات :☑️"   
+end        
+if redis:get(bot_id.."Lock:tagservr"..msg.chat_id_) == "del" then
+tag = "الاشعارات : ❌ : بالمسح"
 else
-idph = "✘"
-end
-if not database:get(bot_id.."Lock:kick"..msg.chat_id_)  then
-setadd = "✓"
+tag =  "الاشعارات :☑️"   
+end        
+if redis:get(bot_id.."lockpin"..msg.chat_id_) == true then
+pin = "التثبيت : ❌ : بالمسح"
 else
-setadd = "✘"
-end
-if not database:get(bot_id.."Lock:Add:Bot"..msg.chat_id_)  then
-banm = "✓"
+pin =  "التثبيت :☑️"   
+end        
+if redis:get(bot_id.."Lock:edit"..msg.chat_id_) == true then
+edit = "التعديل : ❌ : بالمسح"
 else
-banm = "✘"
-end
-if not database:get(bot_id.."Kick:Me"..msg.chat_id_) then
-kickme = "✓"
+edit =  "التعديل :☑️"   
+end        
+if redis:get(bot_id.."Lock:edit"..msg.chat_id_) == true then
+edi = "تعديل الميديا : ❌ : بالمسح"
 else
-kickme = "✘"
+edi =  "تعديل الميديا :☑️"   
+end        
+if redis:get(bot_id.."Lock:Link"..msg.chat_id_) == "del" then
+Link = "الروابط : ❌ : بالمسح"
+elseif redis:get(bot_id.."Lock:Link:"..msg.chat_id_) == "kick" then
+Link = "الروابط : ❌ : بالطرد"
+elseif redis:get(bot_id.."Lock:Link:"..msg.chat_id_) == "ktm" then
+Link = "الروابط : ❌ : بالكتم"
+elseif redis:get(bot_id.."Lock:Link:"..msg.chat_id_) == "ked" then
+Link = "الروابط : ❌ : بالتقييد"
+else
+Link =  "الروابط :☑️"   
+end        
+if redis:get(bot_id.."Lock:User:Name"..msg.chat_id_) == "del" then
+usNa = "المعرفات : ❌ : بالمسح"
+elseif redis:get(bot_id.."Lock:User:Name:"..msg.chat_id_) == "kick" then
+usNa = "المعرفات : ❌ : بالطرد"
+elseif redis:get(bot_id.."Lock:User:Name:"..msg.chat_id_) == "ktm" then
+usNa = "المعرفات : ❌ : بالكتم"
+elseif redis:get(bot_id.."Lock:User:Name:"..msg.chat_id_) == "ked" then
+usNa = "المعرفات : ❌ : بالتقييد"
+else
+usNa =  "المعرفات :☑️"   
+end        
+local Text ="✫: اهلا بك في قائمه اعدادات المجموعه .\n✫:  علامه ( ❌ ) تعني الامر مقفول .\n✫:  علامه ( ☑️ ) تعني الامر مفتوح ."
+keyboard = {} 
+keyboard.inline_keyboard = {
+{{text =te,callback_data=msg.sender_user_id_.."Lock:text"},{text =usNa,callback_data=msg.sender_user_id_.."Lock:User:Name"}},
+{{text =AddM,callback_data=msg.sender_user_id_.."Lock:AddMempar"},{text =Link,callback_data=msg.sender_user_id_.."Lock:Link"}},
+{{text =Jo,callback_data=msg.sender_user_id_.."Lock:Join"},{text =edi,callback_data=msg.sender_user_id_.."Lock:edit"}},
+{{text =Botki,callback_data=msg.sender_user_id_.."Lock:Bot:kick"},{text =edit,callback_data=msg.sender_user_id_.."TR:Lock:pin"}},
+{{text =tag,callback_data=msg.sender_user_id_.."Lock:tagservr"},{text =pin,callback_data=msg.sender_user_id_.."TR:Lock:pin"}},
+{{text ="التالي ➡️ .",callback_data=msg.sender_user_id_.."LS1"}},
+}
+local msg_id = msg.id_/2097152/0.5
+https.request("https://api.telegram.org/bot"..token..'/sendMessage?chat_id=' .. msg.chat_id_ .. '&text=' .. URL.escape(Text).."&reply_to_message_id="..msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
 end
-Num_Flood = database:hget(bot_id.."flooding:settings:"..msg.chat_id_,"floodmax") or 0
-local text = 
-"*\n✫: ااعدادات المجموعه "..
-"\n — — — — — — — — — "..
-"\n✫: علامة ال {✓} تعني مفعل"..
-"\n✫: علامة ال {✘} تعني معطل"..
-"\n — — — — — — — — — "..
-"\n✫: الروابط -› "..lock_links..
-"\n".."✫: المعرفات -› "..lock_user..
-"\n".."✫: التاك -› "..lock_hash..
-"\n".."✫: البوتات -› "..lock_bots..
-"\n".."✫: التوجيه -› "..lock_fwd..
-"\n".."✫: التثبيت -› "..lock_pin..
-"\n".."✫: الاشعارات -› "..lock_tagservr..
-"\n".."✫: الماركدون -› "..lock_mark..
-"\n".."✫: التعديل -› "..lock_edit..
-"\n — — — — — — — — — "..
-"\n".."✫: الكلايش -› "..lock_spam..
-"\n".."✫: الكيبورد -› "..lock_inlin..
-"\n".."✫: الاغاني -› "..lock_vico..
-"\n".."✫: المتحركه -› "..lock_gif..
-"\n".."✫: الملفات -› "..lock_file..
-"\n".."✫: الدردشه -› "..lock_text..
-"\n".."✫: الفيديو -› "..lock_ved..
-"\n".."✫: الصور -› "..lock_photo..
-"\n — — — — — — — — — "..
-"\n".."✫: الصوت -› "..lock_muse..
-"\n".."✫: الملصقات -› "..lock_ste..
-"\n".."✫: الجهات -› "..lock_phon..
-"\n".."✫: الدخول -› "..lock_join..
-"\n".."✫: الاضافه -› "..lock_add..
-"\n".."✫: السيلفي -› "..lock_self..
-"\n".."✫: الالعاب -› "..lock_geam..
-"\n".."✫: التكرار -› "..flood..
-"\n".."✫: الترحيب -› "..welcome..
-"\n".."✫: عدد التكرار -› "..Num_Flood..
-"\n\n.*"
-send(msg.chat_id_, msg.id_,text)     
-end    
 if text == "تعطيل اوامر التحشيش" and Owner(msg) then    
 if AddChannel(msg.sender_user_id_) == false then
 local textchuser = database:get(bot_id..'text:ch:user')
@@ -8539,21 +8288,11 @@ chat_id_ = chat_id
 }, cb, nil)
 end
 if text == 'م1' or text == 'م2' or text == 'م3' or text == 'م4' or text == 'م5' then
-Text = [[مرحبا . اكتب `الاوامر` وتحكم في الكيبورد الكلايش]]
-send(msg.chat_id_, msg.id_,Text)
+send(msg.chat_id_, msg.id_,"مرحبا . اكتب `الاوامر` وتحكم في الكيبورد الكلايش")
 return false
 end
 if text == 'رابط الحذف' or text == 'رابط حذف' then
-t =[[
-رابط الحذف في جميع مواقع التواصل ●
-فكر قبل لا تتسرع وتروح
-ٴ●○━━━∴━━━●○ٴ
- ● رابط حذف  [Telegram](https://my.telegram.org/auth?to=delete) ܁
- ● رابط حذف [instagram](https://www.instagram.com/accounts/login/?next=/accounts/remove/request/permanent/) ܁
- ● رابط حذف [Facebook](https://www.facebook.com/help/deleteaccount) ܁
- ● رابط حذف [Snspchat](https://accounts.snapchat.com/accounts/login?continue=https%3A%2F%2Faccounts.snapchat.com%2Faccounts%2Fdeleteaccount) ܁
-]]
-send(msg.chat_id_, msg.id_,t) 
+send(msg.chat_id_, msg.id_,"رابط الحذف في جميع مواقع التواصل ✫:\nفكر قبل لا تتسرع وتروح\n— — — — — — — — —\n ✫: رابط حذف  [Telegram](https://my.telegram.org/auth?to=delete) ܁\n ✫: رابط حذف [instagram](https://www.instagram.com/accounts/login/?next=/accounts/remove/request/permanent/) ܁\n ✫: رابط حذف [Facebook](https://www.facebook.com/help/deleteaccount) ܁\n ✫: رابط حذف [Snspchat](https://accounts.snapchat.com/accounts/login?continue=https%3A%2F%2Faccounts.snapchat.com%2Faccounts%2Fdeleteaccount) ܁") 
 return false
 end
 if text == 'الاوامر' then
@@ -8562,7 +8301,6 @@ send(msg.chat_id_, msg.id_,'✫ عذرا الاوامر هذا لا تخصك ')
 return false
 end
 local Text =[[
-*ʜɪ ɴɪɢɢᴀ*
  — — — — — — — — —
 ✫:  ① -› لعرض اوامر الحمايه
 ✫:  ② -› لعرض اوامر الادمنيه
@@ -9030,7 +8768,7 @@ local IdDe = text:match("^(%d+)$")
 send(msg.chat_id_,msg.id_, "✫: تم تحفظ المعلومات اضغط ( تحديث الملفات ✫ ) للتنفيذ")
 local A = io.open("sudo.lua", 'w')
 A:write([[
-s = "ZZZZD"
+s = "Zkzzz"
 
 q = "BOBBW"
 
@@ -9364,6 +9102,456 @@ local From_id = data.id_
 local Msg_id = data.message_id_
 local msg_idd = Msg_id/2097152/0.5
 local DAata = data.payload_.data_
+if Addictive(data) then  
+sender_id  = DAata:match("(%d+)")  
+ta = DAata:gsub(data.sender_user_id_,'')
+if ta == "LS0" then   ---LS0
+if tonumber(data.sender_user_id_) == tonumber(sender_id) then
+if redis:get(bot_id.."Lock:text"..Chat_id) == true then
+te = "الدردشه : ❌ : بالمسح"
+else
+te =  "الدردشه :☑️"   
+end        
+if redis:get(bot_id.."Lock:AddMempar"..Chat_id) == "kick" then
+AddM = "الاضافه : ❌ : بالطرد"
+else
+AddM =  "الاضافه :☑️"   
+end        
+if redis:get(bot_id.."Lock:Join"..Chat_id) == "kick" then
+Jo = "الدخول : ❌ : بالطرد"
+else
+Jo =  "الدخول :☑️"   
+end        
+if redis:get(bot_id.."Lock:Bot:kick"..Chat_id) == "del" then
+Botki = "البوتات : ❌ : بالمسح"
+elseif redis:get(bot_id.."Lock:Bot:kick:"..Chat_id) == "kick" then
+Botki = "البوتات : ❌ : بالطرد"
+else
+Botki =  "البوتات :☑️"   
+end        
+if redis:get(bot_id.."Lock:tagservr"..Chat_id) == "del" then
+tag = "الاشعارات : ❌ : بالمسح"
+else
+tag =  "الاشعارات :☑️"   
+end        
+if redis:get(bot_id.."lockpin"..Chat_id) == true then
+pin = "التثبيت : ❌ : بالمسح"
+else
+pin =  "التثبيت :☑️"   
+end        
+if redis:get(bot_id.."Lock:edit"..Chat_id) == true then
+edit = "التعديل : ❌ : بالمسح"
+else
+edit =  "التعديل :☑️"   
+end        
+if redis:get(bot_id.."Lock:edit"..Chat_id) == true then
+edi = "تعديل الميديا : ❌ : بالمسح"
+else
+edi =  "تعديل الميديا :☑️"   
+end        
+if redis:get(bot_id.."Lock:Link"..Chat_id) == "del" then
+Link = "الروابط : ❌ : بالمسح"
+elseif redis:get(bot_id.."Lock:Link:"..Chat_id) == "kick" then
+Link = "الروابط : ❌ : بالطرد"
+elseif redis:get(bot_id.."Lock:Link:"..Chat_id) == "ktm" then
+Link = "الروابط : ❌ : بالكتم"
+elseif redis:get(bot_id.."Lock:Link:"..Chat_id) == "ked" then
+Link = "الروابط : ❌ : بالتقييد"
+else
+Link =  "الروابط :☑️"   
+end        
+if redis:get(bot_id.."Lock:User:Name"..Chat_id) == "del" then
+usNa = "المعرفات : ❌ : بالمسح"
+elseif redis:get(bot_id.."Lock:User:Name:"..Chat_id) == "kick" then
+usNa = "المعرفات : ❌ : بالطرد"
+elseif redis:get(bot_id.."Lock:User:Name:"..Chat_id) == "ktm" then
+usNa = "المعرفات : ❌ : بالكتم"
+elseif redis:get(bot_id.."Lock:User:Name:"..Chat_id) == "ked" then
+usNa = "المعرفات : ❌ : بالتقييد"
+else
+usNa =  "المعرفات :☑️"   
+end        
+keyboard = {} 
+keyboard.inline_keyboard = {
+{{text =te,callback_data=data.sender_user_id_.."TR:Lock:text"},{text =usNa,callback_data=data.sender_user_id_.."Lock:User:Name"}},
+{{text =AddM,callback_data=data.sender_user_id_.."Lock:AddMempar"},{text =Link,callback_data=data.sender_user_id_.."Lock:Link"}},
+{{text =Jo,callback_data=data.sender_user_id_.."Lock:Join"},{text =edi,callback_data=data.sender_user_id_.."Lock:edit"}},
+{{text =Botki,callback_data=data.sender_user_id_.."Lock:Bot:kick"},{text =edit,callback_data=data.sender_user_id_.."TR:Lock:pin"}},
+{{text =tag,callback_data=data.sender_user_id_.."Lock:tagservr"},{text =pin,callback_data=data.sender_user_id_.."TR:Lock:pin"}},
+{{text ="التالي ➡️ .",callback_data=data.sender_user_id_.."LS1"}},
+}
+return https.request("https://api.telegram.org/bot"..token..'/editMessageReplyMarkup?chat_id='..Chat_id..'&message_id='..msg_idd..'&reply_markup='..JSON.encode(keyboard)) 
+else 
+return https.request("https://api.telegram.org/bot"..token.."/answerCallbackQuery?callback_query_id="..data.id_.."&text="..URL.escape('✫: عذرا الامر ليس لك .').."&show_alert=true")
+end
+end
+sender_id  = DAata:match("(%d+)")  
+ta = DAata:gsub(data.sender_user_id_,'')
+if ta == "LS1" then   ---LS1
+if tonumber(data.sender_user_id_) == tonumber(sender_id) then
+if redis:get(bot_id.."lock:Fshar"..Chat_id) == true then
+ar = "الفارسيه : ❌ : بالمسح"
+else
+ar =  "الفارسيه :☑️"   
+end        
+if redis:get(bot_id.."lock:Fshar"..Chat_id) == true then
+arw = "الفشار : ❌ : بالمسح"
+else
+arw =  "الفشار :☑️"   
+end        
+if redis:hget(bot_id.."flooding:settings:"..Chat_id, "flood") == "kick" then     
+flood = "التكرار : ❌ : بالطرد"
+elseif redis:hget(bot_id.."flooding:settings:"..Chat_id,"flood") == "keed" then     
+flood = "التكرار : ❌ : بالتقييد"
+elseif redis:hget(bot_id.."flooding:settings:"..Chat_id,"flood") == "mute" then     
+flood = "التكرار : ❌ : بالكتم"
+elseif redis:hget(bot_id.."flooding:settings:"..Chat_id,"flood") == "del" then     
+flood = "التكرار : ❌ : بالمسح"
+else     
+flood =  "التكرار :☑️"   
+end
+if redis:get(bot_id.."Lock:hashtak"..Chat_id) == "del" then
+ash = "التاك : ❌ : بالمسح"
+elseif redis:get(bot_id.."Lock:hashtak"..Chat_id) == "ked" then 
+ash = "التاك : ❌ : بالتقييد"
+elseif redis:get(bot_id.."Lock:hashtak"..Chat_id) == "ktm" then 
+ash = "التاك : ❌ : بالكتم"
+elseif redis:get(bot_id.."Lock:hashtak"..Chat_id) == "kick" then 
+ash = "التاك : ❌ : بالطرد"
+else
+ash =  "التاك :☑️"   
+end    
+if redis:get(bot_id.."Lock:Cmd"..Chat_id) == "del" then
+Cmd = "الشارحه : ❌ : بالمسح"
+elseif redis:get(bot_id.."Lock:Cmd"..Chat_id) == "ked" then 
+Cmd = "الشارحه : ❌ : بالتقييد"
+elseif redis:get(bot_id.."Lock:Cmd"..Chat_id) == "ktm" then 
+Cmd = "الشارحه : ❌ : بالكتم"
+elseif redis:get(bot_id.."Lock:Cmd"..Chat_id) == "kick" then 
+Cmd = "الشارحه : ❌ : بالطرد"
+else
+Cmd =  "الشارحه :☑️"   
+end    
+if redis:get(bot_id.."Lock:Photo"..Chat_id) == "del" then
+hot = "الصور : ❌ : بالمسح"
+elseif redis:get(bot_id.."Lock:Photo"..Chat_id) == "ked" then 
+hot = "الصور : ❌ : بالتقييد"
+elseif redis:get(bot_id.."Lock:Photo"..Chat_id) == "ktm" then 
+hot = "الصور : ❌ : بالكتم"
+elseif redis:get(bot_id.."Lock:Photo"..Chat_id) == "kick" then 
+hot = "الصور : ❌ : بالطرد"
+else
+hot =  "الصور :☑️"   
+end    
+if redis:get(bot_id.."Lock:Video"..Chat_id) == "del" then
+de = "الفيديو : ❌ : بالمسح"
+elseif redis:get(bot_id.."Lock:Video"..Chat_id) == "ked" then 
+de = "الفيديو : ❌ : بالتقييد"
+elseif redis:get(bot_id.."Lock:Video"..Chat_id) == "ktm" then 
+de = "الفيديو : ❌ : بالكتم"
+elseif redis:get(bot_id.."Lock:Video"..Chat_id) == "kick" then 
+de = "الفيديو : ❌ : بالطرد"
+else
+de =  "الفيديو :☑️"   
+end    
+if redis:get(bot_id.."Lock:Animation"..Chat_id) == "del" then
+Anima = "المتحركه : ❌ : بالمسح"
+elseif redis:get(bot_id.."Lock:Animation"..Chat_id) == "ked" then 
+Anima = "المتحركه : ❌ : بالتقييد"
+elseif redis:get(bot_id.."Lock:Animation"..Chat_id) == "ktm" then 
+Anima = "المتحركه : ❌ : بالكتم"
+elseif redis:get(bot_id.."Lock:Animation"..Chat_id) == "kick" then 
+Anima = "المتحركه : ❌ : بالطرد"
+else
+Anima =  "المتحركه :☑️"   
+end    
+if redis:get(bot_id.."Lock:Audio"..Chat_id) == "del" then
+Audi = "الاغاني : ❌ : بالمسح"
+elseif redis:get(bot_id.."Lock:Audio"..Chat_id) == "ked" then 
+Audi = "الاغاني : ❌ : بالتقييد"
+elseif redis:get(bot_id.."Lock:Audio"..Chat_id) == "ktm" then 
+Audi = "الاغاني : ❌ : بالكتم"
+elseif redis:get(bot_id.."Lock:Audio"..Chat_id) == "kick" then 
+Audi = "الاغاني : ❌ : بالطرد"
+else
+Audi =  "الاغاني :☑️"   
+end    
+if redis:get(bot_id.."Lock:vico"..Chat_id) == "del" then
+vico = "الاغاني : ❌ : بالمسح"
+elseif redis:get(bot_id.."Lock:vico"..Chat_id) == "ked" then 
+vico = "الاغاني : ❌ : بالتقييد"
+elseif redis:get(bot_id.."Lock:vico"..Chat_id) == "ktm" then 
+vico = "الاغاني : ❌ : بالكتم"
+elseif redis:get(bot_id.."Lock:vico"..Chat_id) == "kick" then 
+vico = "الاغاني : ❌ : بالطرد"
+else
+vico =  "الاغاني :☑️"   
+end    
+if redis:get(bot_id.."Lock:Keyboard"..Chat_id) == "del" then
+Keyboard = "الكيبورد : ❌ : بالمسح"
+elseif redis:get(bot_id.."Lock:Keyboard"..Chat_id) == "ked" then 
+Keyboard = "الكيبورد : ❌ : بالتقييد"
+elseif redis:get(bot_id.."Lock:Keyboard"..Chat_id) == "ktm" then 
+Keyboard = "الكيبورد : ❌ : بالكتم"
+elseif redis:get(bot_id.."Lock:Keyboard"..Chat_id) == "kick" then 
+Keyboard = "الكيبورد : ❌ : بالطرد"
+else
+Keyboard =  "الكيبورد :☑️"   
+end    
+if redis:get(bot_id.."Lock:Sticker"..Chat_id) == "del" then
+Sti = "الملصقات : ❌ : بالمسح"
+elseif redis:get(bot_id.."Lock:Sticker"..Chat_id) == "ked" then 
+Sti = "الملصقات : ❌ : بالتقييد"
+elseif redis:get(bot_id.."Lock:Sticker"..Chat_id) == "ktm" then 
+Sti = "الملصقات : ❌ : بالكتم"
+elseif redis:get(bot_id.."Lock:Sticker"..Chat_id) == "kick" then 
+Sti = "الملصقات : ❌ : بالطرد"
+else
+Sti =  "الملصقات :☑️"   
+end    
+if redis:get(bot_id.."Lock:forward"..Chat_id) == "del" then
+orwa = "التوجيه : ❌ : بالمسح"
+elseif redis:get(bot_id.."Lock:forward"..Chat_id) == "ked" then 
+orwa = "التوجيه : ❌ : بالتقييد"
+elseif redis:get(bot_id.."Lock:forward"..Chat_id) == "ktm" then 
+orwa = "التوجيه : ❌ : بالكتم"
+elseif redis:get(bot_id.."Lock:forward"..Chat_id) == "kick" then 
+orwa = "التوجيه : ❌ : بالطرد"
+else
+orwa =  "التوجيه :☑️"   
+end    
+if redis:get(bot_id.."Lock:Document"..Chat_id) == "del" then
+Docu = "الملفات : ❌ : بالمسح"
+elseif redis:get(bot_id.."Lock:Document"..Chat_id) == "ked" then 
+Docu = "الملفات : ❌ : بالتقييد"
+elseif redis:get(bot_id.."Lock:Document"..Chat_id) == "ktm" then 
+Docu = "الملفات : ❌ : بالكتم"
+elseif redis:get(bot_id.."Lock:Document"..Chat_id) == "kick" then 
+Docu = "الملفات : ❌ : بالطرد"
+else
+Docu =  "الملفات :☑️"   
+end    
+keyboard = {} 
+keyboard.inline_keyboard = {
+{{text =Sti,callback_data=data.sender_user_id_.."Lock:Sticker"},{text =Keyboard,callback_data=data.sender_user_id_.."Lock:Keyboard"}},
+{{text =Docu,callback_data=data.sender_user_id_.."Lock:Document"},{text =orwa,callback_data=data.sender_user_id_.."Lock:forward"}},
+{{text =ar,callback_data=data.sender_user_id_.."TR:lock:Fshar"},{text =arw,callback_data=data.sender_user_id_.."TR:lock:Fshar"}},
+{{text =flood,callback_data=data.sender_user_id_.."flooding:settings"},{text =ash,callback_data=data.sender_user_id_.."Lock:hashtak"}},
+{{text =Cmd,callback_data=data.sender_user_id_.."Lock:Cmd"},{text =vico,callback_data=data.sender_user_id_.."Lock:vico"}},
+{{text =hot,callback_data=data.sender_user_id_.."Lock:Photo"},{text =de,callback_data=data.sender_user_id_.."Lock:Video"}},
+{{text =Anima,callback_data=data.sender_user_id_.."Lock:Animation"},{text =Audi,callback_data=data.sender_user_id_.."Lock:Audio"}},
+{{text ="التالي ➡️ .",callback_data=data.sender_user_id_.."LS2"},{text ="السابق ⬅️ .",callback_data=data.sender_user_id_.."LS0"}},
+}
+return https.request("https://api.telegram.org/bot"..token..'/editMessageReplyMarkup?chat_id='..Chat_id..'&message_id='..msg_idd..'&reply_markup='..JSON.encode(keyboard)) 
+else 
+return https.request("https://api.telegram.org/bot"..token.."/answerCallbackQuery?callback_query_id="..data.id_.."&text="..URL.escape('✫: عذرا الامر ليس لك .').."&show_alert=true")
+end
+end
+sender_id  = DAata:match("(%d+)")  
+ta = DAata:gsub(data.sender_user_id_,'')
+if ta == "LS2" then   ---LS2
+if tonumber(data.sender_user_id_) == tonumber(sender_id) then
+if redis:get(bot_id.."Lock:Unsupported"..Chat_id) == "del" then
+rted = "السيلفي : ❌ : بالمسح"
+elseif redis:get(bot_id.."Lock:Unsupported"..Chat_id) == "ked" then 
+rted = "السيلفي : ❌ : بالتقييد"
+elseif redis:get(bot_id.."Lock:Unsupported"..Chat_id) == "ktm" then 
+rted = "السيلفي : ❌ : بالكتم"
+elseif redis:get(bot_id.."Lock:Unsupported"..Chat_id) == "kick" then 
+rted = "السيلفي : ❌ : بالطرد"
+else
+rted =  "السيلفي :☑️"   
+end    
+if redis:get(bot_id.."Lock:Markdaun"..Chat_id) == "del" then
+daun = "الماركداون : ❌ : بالمسح"
+elseif redis:get(bot_id.."Lock:Markdaun"..Chat_id) == "ked" then 
+daun = "الماركداون : ❌ : بالتقييد"
+elseif redis:get(bot_id.."Lock:Markdaun"..Chat_id) == "ktm" then 
+daun = "الماركداون : ❌ : بالكتم"
+elseif redis:get(bot_id.."Lock:Markdaun"..Chat_id) == "kick" then 
+daun = "الماركداون : ❌ : بالطرد"
+else
+daun =  "الماركداون :☑️"   
+end   
+if redis:get(bot_id.."Lock:geam"..Chat_id) == "del" then
+eam = "الالعاب : ❌ : بالمسح"
+elseif redis:get(bot_id.."Lock:geam"..Chat_id) == "ked" then 
+eam = "الالعاب : ❌ : بالتقييد"
+elseif redis:get(bot_id.."Lock:geam"..Chat_id) == "ktm" then 
+eam = "الالعاب : ❌ : بالكتم"
+elseif redis:get(bot_id.."Lock:geam"..Chat_id) == "kick" then 
+eam = "الالعاب : ❌ : بالطرد"
+else
+eam =  "الالعاب :☑️"   
+end    
+if redis:get(bot_id.."Lock:Spam"..Chat_id) == "del" then
+pam = "الكلايش : ❌ : بالمسح"
+elseif redis:get(bot_id.."Lock:Spam"..Chat_id) == "ked" then 
+pam = "الكلايش : ❌ : بالتقييد"
+elseif redis:get(bot_id.."Lock:Spam"..Chat_id) == "ktm" then 
+pam = "الكلايش : ❌ : بالكتم"
+elseif redis:get(bot_id.."Lock:Spam"..Chat_id) == "kick" then 
+pam = "الكلايش : ❌ : بالطرد"
+else
+pam =  "الكلايش :☑️"   
+end    
+if redis:get(bot_id.."Lock:Contact"..Chat_id) == "del" then
+tact = "الجهات : ❌ : بالمسح"
+elseif redis:get(bot_id.."Lock:Contact"..Chat_id) == "ked" then 
+tact = "الجهات : ❌ : بالتقييد"
+elseif redis:get(bot_id.."Lock:Contact"..Chat_id) == "ktm" then 
+tact = "الجهات : ❌ : بالكتم"
+elseif redis:get(bot_id.."Lock:Contact"..Chat_id) == "kick" then 
+tact = "الجهات : ❌ : بالطرد"
+else
+tact =  "الجهات :☑️"   
+end    
+if redis:get(bot_id.."Lock:Inlen"..Chat_id) == "del" then
+len = "الانلاين : ❌ : بالمسح"
+elseif redis:get(bot_id.."Lock:Inlen"..Chat_id) == "ked" then 
+len = "الانلاين : ❌ : بالتقييد"
+elseif redis:get(bot_id.."Lock:Inlen"..Chat_id) == "ktm" then 
+len = "الانلاين : ❌ : بالكتم"
+elseif redis:get(bot_id.."Lock:Inlen"..Chat_id) == "kick" then 
+len = "الانلاين : ❌ : بالطرد"
+else
+len =  "الانلاين :☑️"   
+end   
+if redis:get(bot_id.."Lock:Xn"..Chat_id) == "del" then
+Xn = "الاباحي : ❌ : بالمسح"
+else
+Xn =  "الاباحي :☑️"   
+end    
+keyboard = {} 
+keyboard.inline_keyboard = {
+{{text =rted,callback_data=data.sender_user_id_.."Lock:Unsupported"},{text =Xn,callback_data=data.sender_user_id_.."Lock:Xn"}},
+{{text =daun,callback_data=data.sender_user_id_.."Lock:Markdaun"},{text =len,callback_data=data.sender_user_id_.."Lock:Inlen"}},
+{{text =eam,callback_data=data.sender_user_id_.."Lock:geam"},{text =tact,callback_data=data.sender_user_id_.."Lock:Contact"}},
+{{text =pam,callback_data=data.sender_user_id_.."Lock:Spam"}},
+{{text ="السابق ⬅️ .",callback_data=data.sender_user_id_.."LS1"}},
+}
+return https.request("https://api.telegram.org/bot"..token..'/editMessageReplyMarkup?chat_id='..Chat_id..'&message_id='..msg_idd..'&reply_markup='..JSON.encode(keyboard)) 
+else 
+return https.request("https://api.telegram.org/bot"..token.."/answerCallbackQuery?callback_query_id="..data.id_.."&text="..URL.escape('✫: عذرا الامر ليس لك .').."&show_alert=true")
+end
+end
+end
+if Addictive(data) then  
+sender_match  = DAata:match("(%d+)")  
+get_r = DAata:gsub(sender_match,''):gsub("TR:",'')
+get_redis = DAata:gsub(sender_match,'')
+if DAata and get_redis:match("^Lock:(.*)$") then   
+if tonumber(data.sender_user_id_) == tonumber(sender_match) then
+if not redis:get(bot_id..""..get_redis..""..Chat_id) then ---not
+redis:set(bot_id..""..get_redis..""..Chat_id,"del") 
+elseif redis:get(bot_id..""..get_redis..""..Chat_id)== "del" then
+redis:set(bot_id..""..get_redis..""..Chat_id,"ktm") 
+elseif redis:get(bot_id..""..get_redis..""..Chat_id)== "ktm" then
+redis:set(bot_id..""..get_redis..""..Chat_id,"kick") 
+elseif redis:get(bot_id..""..get_redis..""..Chat_id)== "kick" then
+redis:set(bot_id..""..get_redis..""..Chat_id,"ked") 
+elseif redis:get(bot_id..""..get_redis..""..Chat_id)== "ked" then
+redis:del(bot_id..""..get_redis..""..Chat_id)  
+end ---notget
+if get_redis == "flooding:settings" then
+if not redis:hget(bot_id.."flooding:settings:"..Chat_id,"flood") then    
+redis:hset(bot_id.."flooding:settings:"..Chat_id ,"flood","del")  
+elseif redis:hget(bot_id.."flooding:settings:"..Chat_id,"flood") == "del" then     
+redis:hset(bot_id.."flooding:settings:"..Chat_id ,"flood","ktm") 
+elseif redis:hget(bot_id.."flooding:settings:"..Chat_id,"flood") == "ktm" then     
+redis:hset(bot_id.."flooding:settings:"..Chat_id ,"flood","ked") 
+elseif redis:hget(bot_id.."flooding:settings:"..Chat_id,"flood") == "ked" then     
+redis:hset(bot_id.."flooding:settings:"..Chat_id ,"flood","ked") 
+elseif redis:hget(bot_id.."flooding:settings:"..Chat_id,"kick") == "kick" then     
+redis:hdel(bot_id.."flooding:settings:"..msg.chat_id_ ,"flood")  
+end ---notget
+end ---get_redis
+if DAata and get_redis:match("^TR:(.*)$") then   
+if not redis:get(bot_id..""..get_r..""..Chat_id) then ---not
+redis:set(bot_id..""..get_r..""..Chat_id,true) 
+elseif redis:get(bot_id..""..get_r..""..Chat_id)== true then
+redis:del(bot_id..""..get_r..""..Chat_id) 
+end ---TR
+end ---get_r
+if redis:get(bot_id.."Lock:text"..Chat_id) == true then
+te = "الدردشه : ❌ : بالمسح"
+else
+te =  "الدردشه :☑️"   
+end        
+if redis:get(bot_id.."Lock:AddMempar"..Chat_id) == "kick" then
+AddM = "الاضافه : ❌ : بالطرد"
+else
+AddM =  "الاضافه :☑️"   
+end        
+if redis:get(bot_id.."Lock:Join"..Chat_id) == "kick" then
+Jo = "الدخول : ❌ : بالطرد"
+else
+Jo =  "الدخول :☑️"   
+end        
+if redis:get(bot_id.."Lock:Bot:kick"..Chat_id) == "del" then
+Botki = "البوتات : ❌ : بالمسح"
+elseif redis:get(bot_id.."Lock:Bot:kick:"..Chat_id) == "kick" then
+Botki = "البوتات : ❌ : بالطرد"
+else
+Botki =  "البوتات :☑️"   
+end        
+if redis:get(bot_id.."Lock:tagservr"..Chat_id) == "del" then
+tag = "الاشعارات : ❌ : بالمسح"
+else
+tag =  "الاشعارات :☑️"   
+end        
+if redis:get(bot_id.."lockpin"..Chat_id) == true then
+pin = "التثبيت : ❌ : بالمسح"
+else
+pin =  "التثبيت :☑️"   
+end        
+if redis:get(bot_id.."Lock:edit"..Chat_id) == true then
+edit = "التعديل : ❌ : بالمسح"
+else
+edit =  "التعديل :☑️"   
+end        
+if redis:get(bot_id.."Lock:edit"..Chat_id) == true then
+edi = "تعديل الميديا : ❌ : بالمسح"
+else
+edi =  "تعديل الميديا :☑️"   
+end        
+if redis:get(bot_id.."Lock:Link"..Chat_id) == "del" then
+Link = "الروابط : ❌ : بالمسح"
+elseif redis:get(bot_id.."Lock:Link:"..Chat_id) == "kick" then
+Link = "الروابط : ❌ : بالطرد"
+elseif redis:get(bot_id.."Lock:Link:"..Chat_id) == "ktm" then
+Link = "الروابط : ❌ : بالكتم"
+elseif redis:get(bot_id.."Lock:Link:"..Chat_id) == "ked" then
+Link = "الروابط : ❌ : بالتقييد"
+else
+Link =  "الروابط :☑️"   
+end        
+if redis:get(bot_id.."Lock:User:Name"..Chat_id) == "del" then
+usNa = "المعرفات : ❌ : بالمسح"
+elseif redis:get(bot_id.."Lock:User:Name:"..Chat_id) == "kick" then
+usNa = "المعرفات : ❌ : بالطرد"
+elseif redis:get(bot_id.."Lock:User:Name:"..Chat_id) == "ktm" then
+usNa = "المعرفات : ❌ : بالكتم"
+elseif redis:get(bot_id.."Lock:User:Name:"..Chat_id) == "ked" then
+usNa = "المعرفات : ❌ : بالتقييد"
+else
+usNa =  "المعرفات :☑️"   
+end        
+keyboard = {} 
+keyboard.inline_keyboard = {
+{{text =te,callback_data=data.sender_user_id_.."TR:Lock:text"},{text =usNa,callback_data=data.sender_user_id_.."Lock:User:Name"}},
+{{text =AddM,callback_data=data.sender_user_id_.."Lock:AddMempar"},{text =Link,callback_data=data.sender_user_id_.."Lock:Link"}},
+{{text =Jo,callback_data=data.sender_user_id_.."Lock:Join"},{text =edi,callback_data=data.sender_user_id_.."Lock:edit"}},
+{{text =Botki,callback_data=data.sender_user_id_.."Lock:pin"},{text =edit,callback_data=data.sender_user_id_.."Lock:edit"}},
+{{text =tag,callback_data=data.sender_user_id_.."Lock:tagservr"},{text =pin,callback_data=data.sender_user_id_.."lockpin"}},
+{{text ="التالي ➡️ .",callback_data=data.sender_user_id_.."LS1"}},
+}
+return https.request("https://api.telegram.org/bot"..token..'/editMessageReplyMarkup?chat_id='..Chat_id..'&message_id='..msg_idd..'&reply_markup='..JSON.encode(keyboard)) 
+else 
+return https.request("https://api.telegram.org/bot"..token.."/answerCallbackQuery?callback_query_id="..data.id_.."&text="..URL.escape('✫: عذرا الامر ليس لك .').."&show_alert=true")
+end
+end
+end
 if DAata == '/help1' then
 if not Addictive(data) then
 local notText = '✫ عذرا الاوامر هذه لا تخصك'
