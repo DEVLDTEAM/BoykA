@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 cd $HOME/BoykA
 rm -rf $HOME/.telegram-cli
-install() {
+install(){
+apt install dnsutils
 rm -rf $HOME/.telegram-cli
 sudo chmod +x tg
 chmod +x Run
