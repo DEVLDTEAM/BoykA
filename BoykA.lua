@@ -8701,6 +8701,25 @@ end
 if text =='✫: مسح الثانويين .' and not VIP_DeV(msg) then
 send(msg.chat_id_, msg.id_,'✫: تسرسح .')
 end
+if text and database:get(bot_id..'na:Bots') then
+if text == '✫: الغاء .' then   
+send(msg.chat_id_, msg.id_,"✫: تم الغاء حفظ اسم البوت") 
+database:del(bot_id..'na:Bots') 
+return false
+end
+database:set(bot_id.."Name:Bot",text)  
+send(msg.chat_id_, msg.id_,'✫: تم حفظ اسم البوت') 
+database:del(bot_id..'na:Bots') 
+return false
+end
+if text == '✫: تغيير اسم البوت .' then
+database:set(bot_id..'na:Bots',true) 
+send(msg.chat_id_, msg.id_,'✫: ارسل اسم البوت الان . ') 
+end
+if text == '✫: قناه تحديثات البوت .' then  
+send(msg.chat_id_, msg.id_,'✫: [تحديثات البوت](t.me/BOBBW) .\n - [قناه السورس](t.me/pvv_v) .')
+return false  
+end
 if text =='الاحصائيات ✫' then
 local Groups = database:scard(bot_id..'Chek:Groups')  
 local Users = database:scard(bot_id..'UsersBot')  
