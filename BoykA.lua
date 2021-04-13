@@ -9147,7 +9147,7 @@ local msg = data.message_
 local text = msg.content_.text_
 if msg.date_ and msg.date_ < tonumber(os.time() - 30) then
 print("OLD MESSAGE")
-return false
+---return false
 end
 if msg.sender_user_id_ and Muted_Groups(msg.chat_id_,msg.sender_user_id_) then 
 DeleteMessage(msg.chat_id_, {[0] = msg.id_})  
