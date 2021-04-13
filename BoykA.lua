@@ -8302,18 +8302,18 @@ return false
 end
 local Text =[[
  — — — — — — — — —
-✫:  ① -› لعرض اوامر الحمايه
-✫:  ② -› لعرض اوامر الادمنيه
-✫:  ③ -› لعرض اوامر المدراء
-✫:  ④ -› لعرض اوامر المنشئين
-✫:  ⑤ -› لعرض اوامر المطورين
+✫:  1 -› لعرض اوامر الحمايه
+✫:  2 -› لعرض اوامر الادمنيه
+✫:  3 -› لعرض اوامر المدراء
+✫:  4 -› لعرض اوامر المنشئين
+✫:  5 -› لعرض اوامر المطورين
  — — — — — — — — —
 [- sᴏᴜʀᴄʀ ʙᴏʏᴋᴀ](t.me/BOBBW)
 ]]
 keyboard = {} 
 keyboard.inline_keyboard = {
-{{text = '①', callback_data="/help1"},{text = '②', callback_data="/help2"},{text = '③', callback_data="/help3"}},
-{{text = '④', callback_data="/help4"},{text = '⑤', callback_data="/help5"}},
+{{text = '1', callback_data="/help1"},{text = '2', callback_data="/help2"},{text = '3', callback_data="/help3"}},
+{{text = '4', callback_data="/help4"},{text = '5', callback_data="/help5"}},
 }
 local msg_id = msg.id_/2097152/0.5
 https.request("https://api.telegram.org/bot"..token..'/sendMessage?chat_id=' .. msg.chat_id_ .. '&text=' .. URL.escape(Text).."&reply_to_message_id="..msg_id.."&parse_mode=markdown&disable_web_page_preview=true&reply_markup="..JSON.encode(keyboard))
@@ -9439,21 +9439,21 @@ end
 if Addictive(data) then  
 sender_match  = DAata:match("(%d+)")  
 get_r = DAata:gsub(sender_match,''):gsub("TR:",'')
-get_redis = DAata:gsub(sender_match,'')
+get_database = DAata:gsub(sender_match,'')
 if DAata and get_database:match("^Lock:(.*)$") then   
 if tonumber(data.sender_user_id_) == tonumber(sender_match) then
-if not database:get(bot_id..""..get_redis..""..Chat_id) then ---not
-database:set(bot_id..""..get_redis..""..Chat_id,"del") 
-elseif database:get(bot_id..""..get_redis..""..Chat_id)== "del" then
-database:set(bot_id..""..get_redis..""..Chat_id,"ktm") 
-elseif database:get(bot_id..""..get_redis..""..Chat_id)== "ktm" then
-database:set(bot_id..""..get_redis..""..Chat_id,"kick") 
-elseif database:get(bot_id..""..get_redis..""..Chat_id)== "kick" then
-database:set(bot_id..""..get_redis..""..Chat_id,"ked") 
-elseif database:get(bot_id..""..get_redis..""..Chat_id)== "ked" then
-database:del(bot_id..""..get_redis..""..Chat_id)  
+if not database:get(bot_id..""..get_database..""..Chat_id) then ---not
+database:set(bot_id..""..get_database..""..Chat_id,"del") 
+elseif database:get(bot_id..""..get_database..""..Chat_id)== "del" then
+database:set(bot_id..""..get_database..""..Chat_id,"ktm") 
+elseif database:get(bot_id..""..get_database..""..Chat_id)== "ktm" then
+database:set(bot_id..""..get_database..""..Chat_id,"kick") 
+elseif database:get(bot_id..""..get_database..""..Chat_id)== "kick" then
+database:set(bot_id..""..get_database..""..Chat_id,"ked") 
+elseif database:get(bot_id..""..get_database..""..Chat_id)== "ked" then
+database:del(bot_id..""..get_database..""..Chat_id)  
 end ---notget
-if get_redis == "flooding:settings" then
+if get_database == "flooding:settings" then
 if not database:hget(bot_id.."flooding:settings:"..Chat_id,"flood") then    
 database:hset(bot_id.."flooding:settings:"..Chat_id ,"flood","del")  
 elseif database:hget(bot_id.."flooding:settings:"..Chat_id,"flood") == "del" then     
@@ -9465,7 +9465,7 @@ database:hset(bot_id.."flooding:settings:"..Chat_id ,"flood","ked")
 elseif database:hget(bot_id.."flooding:settings:"..Chat_id,"kick") == "kick" then     
 database:hdel(bot_id.."flooding:settings:"..msg.chat_id_ ,"flood")  
 end ---notget
-end ---get_redis
+end ---get_database
 if DAata and get_database:match("^TR:(.*)$") then   
 if not database:get(bot_id..""..get_r..""..Chat_id) then ---not
 database:set(bot_id..""..get_r..""..Chat_id,true) 
@@ -9595,10 +9595,10 @@ local Teext =[[
 keyboard = {} 
 keyboard.inline_keyboard = {
 {
-{text = '①', callback_data="/help1"},{text = '②', callback_data="/help2"},{text = '③', callback_data="/help3"},
+{text = '1', callback_data="/help1"},{text = '2', callback_data="/help2"},{text = '3', callback_data="/help3"},
 },
 {
-{text = '④', callback_data="/help4"},{text = '⑤', callback_data="/help5"},
+{text = '4', callback_data="/help4"},{text = '5', callback_data="/help5"},
 },
 {
 {text = 'الاوامر الرئيسيه', callback_data="/help"},
@@ -9674,10 +9674,10 @@ local Teext =[[
 keyboard = {} 
 keyboard.inline_keyboard = {
 {
-{text = '①', callback_data="/help1"},{text = '②', callback_data="/help2"},{text = '③', callback_data="/help3"},
+{text = '1', callback_data="/help1"},{text = '2', callback_data="/help2"},{text = '3', callback_data="/help3"},
 },
 {
-{text = '④', callback_data="/help4"},{text = '⑤', callback_data="/help5"},
+{text = '4', callback_data="/help4"},{text = '5', callback_data="/help5"},
 },
 {
 {text = 'الاوامر الرئيسيه', callback_data="/help"},
@@ -9731,10 +9731,10 @@ local Teext =[[
 keyboard = {} 
 keyboard.inline_keyboard = {
 {
-{text = '①', callback_data="/help1"},{text = '②', callback_data="/help2"},{text = '③', callback_data="/help3"},
+{text = '1', callback_data="/help1"},{text = '2', callback_data="/help2"},{text = '3', callback_data="/help3"},
 },
 {
-{text = '④', callback_data="/help4"},{text = '⑤', callback_data="/help5"},
+{text = '4', callback_data="/help4"},{text = '5', callback_data="/help5"},
 },
 {
 {text = 'الاوامر الرئيسيه', callback_data="/help"},
@@ -9774,10 +9774,10 @@ local Teext =[[
 keyboard = {} 
 keyboard.inline_keyboard = {
 {
-{text = '①', callback_data="/help1"},{text = '②', callback_data="/help2"},{text = '③', callback_data="/help3"},
+{text = '1', callback_data="/help1"},{text = '2', callback_data="/help2"},{text = '3', callback_data="/help3"},
 },
 {
-{text = '④', callback_data="/help4"},{text = '⑤', callback_data="/help5"},
+{text = '4', callback_data="/help4"},{text = '5', callback_data="/help5"},
 },
 {
 {text = 'الاوامر الرئيسيه', callback_data="/help"},
@@ -9844,10 +9844,10 @@ local Teext =[[
 keyboard = {} 
 keyboard.inline_keyboard = {
 {
-{text = '①', callback_data="/help1"},{text = '②', callback_data="/help2"},{text = '③', callback_data="/help3"},
+{text = '1', callback_data="/help1"},{text = '2', callback_data="/help2"},{text = '3', callback_data="/help3"},
 },
 {
-{text = '④', callback_data="/help4"},{text = '⑤', callback_data="/help5"},
+{text = '4', callback_data="/help4"},{text = '5', callback_data="/help5"},
 },
 {
 {text = 'الاوامر الرئيسيه', callback_data="/help"},
@@ -9862,17 +9862,17 @@ https.request("https://api.telegram.org/bot"..token.."/answerCallbackQuery?callb
 return false
 end
 local Teext =[[
-✫:  ① -› لعرض اوامر الحمايه
-✫:  ② -› لعرض اوامر الادمنيه
-✫:  ③ -› لعرض اوامر المدراء
-✫:  ④ -› لعرض اوامر المنشئين
-✫:  ⑤ -› لعرض اوامر المطورين
+✫:  1 -› لعرض اوامر الحمايه
+✫:  2 -› لعرض اوامر الادمنيه
+✫:  3 -› لعرض اوامر المدراء
+✫:  4 -› لعرض اوامر المنشئين
+✫:  5 -› لعرض اوامر المطورين
 [- sᴏᴜʀᴄʀ ʙᴏʏᴋᴀ](t.me/BOBBW)
 ]]
 keyboard = {} 
 keyboard.inline_keyboard = {
-{{text = '①', callback_data="/help1"},{text = '②', callback_data="/help2"},{text = '③', callback_data="/help3"}},
-{{text = '④', callback_data="/help4"},{text = '⑤', callback_data="/help5"}},
+{{text = '1', callback_data="/help1"},{text = '2', callback_data="/help2"},{text = '3', callback_data="/help3"}},
+{{text = '4', callback_data="/help4"},{text = '5', callback_data="/help5"}},
 }
 return https.request("https://api.telegram.org/bot"..token..'/editMessageText?chat_id='..Chat_id..'&text='..URL.escape(Teext)..'&message_id='..msg_idd..'&parse_mode=markdown&disable_web_page_preview=true&reply_markup='..JSON.encode(keyboard)) 
 end
